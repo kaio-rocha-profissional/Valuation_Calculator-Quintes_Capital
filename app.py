@@ -1,5 +1,32 @@
 import streamlit as st
 
+from streamlit_gsheets import GSheetsConnection
+import pandas as pd
+from datetime import datetime
+
+# No topo do código, logo após os imports, adicione a conexão
+conn = st.connection("gsheets", type=GSheetsConnection)
+
+# ... (dentro do seu formulário, onde o usuário clica em "Gerar")
+if submit:
+    # Criar um DataFrame com o novo lead
+    novo_lead = pd.DataFrame([{
+        "Data": datetime.now().strftime("%d/%m/%Y %H:%M"),
+        "Nome": nome,
+        "WhatsApp": whatsapp,
+        "Empresa": empresa,
+        "EBITDA": ebitda_anual,
+        "Valuation": valuation_estimado,
+        "Interesse": "Aguardando Escolha"
+    }])
+    
+    # Adicionar à planilha existente
+    dados_existentes = conn.read(worksheet="Página1")
+    dados_atualizados = pd.concat([dados_existentes, novo_lead], ignore_index=True)
+    conn.update(worksheet="Página1", data=dados_atualizados)
+    
+    st.success("Dados registrados com sucesso!")
+
 st.set_page_config(page_title="Valuation Telecom - Cortesia", layout="centered")
 
 # --- ESTILIZAÇÃO SIMPLES ---
