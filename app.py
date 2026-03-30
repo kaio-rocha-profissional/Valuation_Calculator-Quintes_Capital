@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(page_title="Valuation Telecom - Cortesia", layout="centered")
 
 # --- ESTILIZAÇÃO SIMPLES ---
-st.title("📊 Análise de Mercado: Setor Telecom")
+st.title("Análise de Mercado: Setor Telecom")
 st.write("Descubra o Valuation da sua operação de forma gratuita.")
 
 # --- SESSÃO DE CONTROLE (Para saber em qual etapa o usuário está) ---
@@ -66,9 +66,9 @@ elif st.session_state.etapa == 2:
     st.subheader("📈 Como você deseja prosseguir com este resultado?")
     
     escolha = st.radio("Selecione uma opção para detalhamento:", [
-        "Quero o Relatório Completo + Check-up de Indicadores e Plano de Ação",
-        "Quero o Plano SaaS: Acompanhamento mensal e Software ilimitado",
-        "Quero falar com um Advisor: Minha empresa está pronta para M&A (Venda/Fusão)"
+        "Quero o Plano Básico: Relatório Completo + Plano de Ação",
+        "Quero o Plano Avançado: Aplicativo Calculadora de Valuation + Mentoria particular",
+        "Quero falar com um Consultor Quintes"
     ])
     
     if st.button("Confirmar Interesse"):
