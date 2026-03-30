@@ -1,0 +1,78 @@
+import streamlit as st
+
+st.set_page_config(page_title="Valuation Telecom - Cortesia", layout="centered")
+
+# --- ESTILIZAÇÃO SIMPLES ---
+st.title("📊 Análise de Mercado: Setor Telecom")
+st.write("Descubra o Valuation da sua operação de forma gratuita e instantânea.")
+
+# --- SESSÃO DE CONTROLE (Para saber em qual etapa o usuário está) ---
+if 'etapa' not in st.session_state:
+    st.session_state.etapa = 1
+
+# --- ETAPA 1: CAPTAÇÃO E CÁLCULO ---
+if st.session_state.etapa == 1:
+    with st.form("form_captacao"):
+        st.subheader("📝 Dados da Operação")
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            nome = st.text_input("Seu Nome *")
+            email = st.text_input("E-mail Corporativo *")
+            empresa = st.text_input("Nome do Provedor *")
+        with col2:
+            whatsapp = st.text_input("WhatsApp (com DDD) *")
+            uf = st.selectbox("Estado", ["SP", "RJ", "MG", "PR", "SC", "RS", "Outro"])
+            assinantes = st.number_input("Qtd de Assinantes", min_value=0)
+
+        st.divider()
+        
+        col3, col4 = st.columns(2)
+        with col3:
+            ebitda_anual = st.number_input("EBITDA Anual (R$)", min_value=0.0)
+            churn = st.slider("Churn Rate Mensal (%)", 0.0, 10.0, 1.5)
+        with col4:
+            mrr = st.number_input("Receita Mensal (MRR)", min_value=0.0)
+            ticket_medio = st.number_input("Ticket Médio (ARPU)", min_value=0.0)
+
+        submit = st.form_submit_button("Gerar meu Valuation Cortesia 🚀")
+
+        if submit:
+            if not nome or not email or ebitda_anual == 0:
+                st.error("Por favor, preencha os dados essenciais para o cálculo.")
+            else:
+                # LOGICA DE CÁLCULO (Exemplo: Múltiplo de 6x EBITDA)
+                valuation_estimado = ebitda_anual * 6 
+                
+                # SALVANDO NA SESSÃO (Simulando registro de prospecção inversa)
+                st.session_state.dados_cliente = {
+                    "nome": nome, "empresa": empresa, "whatsapp": whatsapp,
+                    "ebitda": ebitda_anual, "valuation": valuation_estimado
+                }
+                st.session_state.etapa = 2
+                st.rerun()
+
+# --- ETAPA 2: RESULTADO E CONVERSÃO ---
+elif st.session_state.etapa == 2:
+    dados = st.session_state.dados_cliente
+    
+    st.balloons()
+    st.success(f"### Valuation Estimado da {dados['empresa']}:")
+    st.metric(label="Valor de Mercado (Estimativa Estática)", value=f"R$ {dados['valuation']:,.2f}")
+    
+    st.info("💡 Este valor é uma estimativa baseada em múltiplos de mercado atuais para o setor de Telecom.")
+    
+    st.divider()
+    st.subheader("📈 Como você deseja prosseguir com este resultado?")
+    
+    escolha = st.radio("Selecione uma opção para detalhamento:", [
+        "Quero o Relatório Completo + Check-up de Indicadores e Plano de Ação",
+        "Quero o Plano SaaS: Acompanhamento mensal e Software ilimitado",
+        "Quero falar com um Advisor: Minha empresa está pronta para M&A (Venda/Fusão)"
+    ])
+    
+    if st.button("Confirmar Interesse"):
+        st.write(f"Excelente escolha, {dados['nome']}! Nossa equipe entrará em contato via WhatsApp ({dados['whatsapp']}) com os próximos passos para a opção selecionada.")
+        if st.button("Refazer Cálculo"):
+            st.session_state.etapa = 1
+            st.rerun()
