@@ -15,7 +15,7 @@ if 'etapa' not in st.session_state:
 
 # --- ETAPA 1: CAPTAÇÃO E CÁLCULO ---
 if st.session_state.etapa == 1:
-    st.title("📊 Análise de Mercado: Setor Telecom")
+    st.title("Análise de Mercado: Setor Telecom")
     st.write("Descubra o Valuation da sua operação de forma gratuita.")
 
     with st.form("form_captacao"):
