@@ -23,7 +23,7 @@ if st.session_state.etapa == 1:
         with col2:
             whatsapp = st.text_input("WhatsApp (com DDD) *")
             uf = st.selectbox("Estado", ["SP", "RJ", "MG", "PR", "SC", "RS", "Outro"])
-            assinantes = st.number_input("Qtd de Assinantes", min_value=0)
+            assinantes = st.number_input("Número de Assinantes", min_value=0)
 
         st.divider()
         
