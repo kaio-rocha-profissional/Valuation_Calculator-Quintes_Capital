@@ -4,7 +4,7 @@ st.set_page_config(page_title="Valuation Telecom - Cortesia", layout="centered")
 
 # --- ESTILIZAÇÃO SIMPLES ---
 st.title("📊 Análise de Mercado: Setor Telecom")
-st.write("Descubra o Valuation da sua operação de forma gratuita e instantânea.")
+st.write("Descubra o Valuation da sua operação de forma gratuita.")
 
 # --- SESSÃO DE CONTROLE (Para saber em qual etapa o usuário está) ---
 if 'etapa' not in st.session_state:
@@ -13,7 +13,7 @@ if 'etapa' not in st.session_state:
 # --- ETAPA 1: CAPTAÇÃO E CÁLCULO ---
 if st.session_state.etapa == 1:
     with st.form("form_captacao"):
-        st.subheader("📝 Dados da Operação")
+        st.subheader("Dados da Operação")
         col1, col2 = st.columns(2)
         
         with col1:
@@ -35,7 +35,7 @@ if st.session_state.etapa == 1:
             mrr = st.number_input("Receita Mensal (MRR)", min_value=0.0)
             ticket_medio = st.number_input("Ticket Médio (ARPU)", min_value=0.0)
 
-        submit = st.form_submit_button("Gerar meu Valuation Cortesia 🚀")
+        submit = st.form_submit_button("Gerar meu Valuation")
 
         if submit:
             if not nome or not email or ebitda_anual == 0:
