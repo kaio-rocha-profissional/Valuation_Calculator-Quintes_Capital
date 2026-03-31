@@ -1,108 +1,66 @@
 import streamlit as st
-from streamlit_gsheets import GSheetsConnection
-import pandas as pd
-from datetime import datetime
 
-# 1. SEMPRE a primeira configuração do Streamlit
-st.set_page_config(page_title="Valuation Telecom - Cortesia", layout="centered")
+# Configuração da página
+st.set_page_config(page_title="Quintes Capital - Resultado Valuation", layout="centered")
 
-# 2. Conexão com o Google Sheets
-conn = st.connection("gsheets", type=GSheetsConnection)
+# --- ESTILIZAÇÃO CUSTOMIZADA ---
+st.markdown("""
+    <style>
+    .main { background-color: #f5f7f9; }
+    .stButton>button { width: 100%; border-radius: 5px; height: 3em; background-color: #007BFF; color: white; }
+    </style>
+    """, unsafe_allow_html=True)
 
-# --- SESSÃO DE CONTROLE ---
-if 'etapa' not in st.session_state:
-    st.session_state.etapa = 1
+# --- CAPTAÇÃO DE DADOS DA URL (Vindo do Fillout) ---
+query_params = st.query_params
 
-# --- ETAPA 1: CAPTAÇÃO E CÁLCULO ---
-if st.session_state.etapa == 1:
-    st.title("Análise de Mercado: Setor Telecom")
-    st.write("Descubra o Valuation da sua operação de forma gratuita.")
+nome = query_params.get("nome", "Investidor")
+empresa = query_params.get("empresa", "sua empresa")
+ebitda = float(query_params.get("ebitda", 0))
+assinantes = int(query_params.get("assinantes", 0))
 
-    with st.form("form_captacao"):
-        st.subheader("Dados da Operação")
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            nome = st.text_input("Seu Nome *")
-            email = st.text_input("E-mail Corporativo *")
-            empresa = st.text_input("Nome do Provedor *")
-        with col2:
-            whatsapp = st.text_input("WhatsApp (com DDD) *")
-            uf = st.selectbox("Estado", ["SP", "RJ", "MG", "PR", "SC", "RS", "Outro"])
-            assinantes = st.number_input("Número de Assinantes", min_value=0)
-
-        st.divider()
-        
-        col3, col4 = st.columns(2)
-        with col3:
-            ebitda_anual = st.number_input("EBITDA Anual (R$)", min_value=0.0)
-            churn = st.slider("Churn Rate Mensal (%)", 0.0, 10.0, 1.5)
-        with col4:
-            mrr = st.number_input("Receita Mensal (MRR)", min_value=0.0)
-            ticket_medio = st.number_input("Ticket Médio (ARPU)", min_value=0.0)
-
-        submit = st.form_submit_button("Gerar meu Valuation 🚀")
-
-        if submit:
-            if not nome or not email or ebitda_anual == 0:
-                st.error("Por favor, preencha os dados essenciais para o cálculo.")
-            else:
-                # LÓGICA DE CÁLCULO (Ajustada para a média que sugerimos)
-                val_ebitda = ebitda_anual * 6
-                valuation_estimado = val_ebitda
-                
-                # --- PROSPECÇÃO INVERSA: GRAVANDO NO GOOGLE SHEETS ---
-                try:
-                    novo_lead = pd.DataFrame([{
-                        "Data": datetime.now().strftime("%d/%m/%Y %H:%M"),
-                        "Nome": nome,
-                        "WhatsApp": whatsapp,
-                        "Empresa": empresa,
-                        "UF": uf,
-                        "EBITDA": ebitda_anual,
-                        "Valuation": valuation_estimado,
-                        "Interesse": "Acessou Resultado"
-                    }])
-                    
-                    # Lê os dados existentes e concatena (Ajuste o nome da worksheet se necessário)
-                    dados_existentes = conn.read(worksheet="Página1")
-                    dados_atualizados = pd.concat([dados_existentes, novo_lead], ignore_index=True)
-                    conn.update(worksheet="Página1", data=atualizados)
-                except:
-                    # Se o Sheets ainda não estiver configurado nas Secrets, o app não trava
-                    pass
-
-                # SALVANDO NA SESSÃO PARA A ETAPA 2
-                st.session_state.dados_cliente = {
-                    "nome": nome, "empresa": empresa, "whatsapp": whatsapp,
-                    "ebitda": ebitda_anual, "valuation": valuation_estimado
-                }
-                st.session_state.etapa = 2
-                st.rerun()
-
-# --- ETAPA 2: RESULTADO E CONVERSÃO ---
-elif st.session_state.etapa == 2:
-    dados = st.session_state.dados_cliente
+# Se não houver dados na URL, mostramos a Landing Page inicial
+if ebitda == 0:
+    st.image("https://seu-logo-aqui.com/logo.png", width=200) # Opcional: coloque seu logo
+    st.title("Descubra o valor de mercado do seu Provedor")
+    st.write("A Quintes Capital ajuda você a entender o real potencial da sua operação através de métricas precisas de M&A.")
     
+    # BOTÃO QUE LEVA PARA O FILLOUT
+    link_fillout = "https://forms.fillout.com/t/seulinkdoform" # COLOQUE SEU LINK AQUI
+    st.markdown(f'<a href="{link_fillout}" target="_self"><button style="width:100%; height:50px; cursor:pointer; background-color:#007BFF; color:white; border:none; border-radius:5px; font-size:18px;">Começar Valuation Gratuito 🚀</button></a>', unsafe_allow_html=True)
+
+else:
+    # --- LÓGICA DE CÁLCULO M&A QUINTES ---
+    # Usando a média: (7x EBITDA + R$2000 por assinante) / 2
+    val_ebitda = ebitda * 7
+    val_base = assinantes * 2000
+    valuation_final = (val_ebitda + val_base) / 2 if assinantes > 0 else val_ebitda
+
+    # --- TELA DE RESULTADO ---
     st.balloons()
-    st.success(f"### Valuation Estimado da {dados['empresa']}:")
-    st.metric(label="Valor de Mercado (Estimativa Estática)", value=f"R$ {dados['valuation']:,.2f}")
+    st.subheader(f"Olá, {nome}! Aqui está a análise da {empresa}:")
     
-    st.info("💡 Este valor é uma estimativa baseada em múltiplos de mercado atuais para o setor de Telecom.")
-    
+    st.markdown(f"""
+        <div style="background-color: white; padding: 30px; border-radius: 10px; border-left: 10px solid #007BFF; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+            <h4 style="color: #555;">Valuation Estimado (Cortesia)</h4>
+            <h1 style="color: #007BFF;">R$ {valuation_final:,.2f}</h1>
+        </div>
+    """, unsafe_allow_html=True)
+
     st.divider()
-    st.subheader("📈 Como você deseja prosseguir com este resultado?")
     
-    escolha = st.radio("Selecione uma opção para detalhamento:", [
-        "Quero o Plano Básico: Relatório Completo + Plano de Ação",
-        "Quero o Plano Avançado: Aplicativo Calculadora + Mentoria particular",
-        "Quero falar com um Consultor Quintes Capital"
-    ])
+    st.subheader("Escolha como deseja evoluir este resultado:")
     
-    if st.button("Confirmar Interesse"):
-        # Aqui você pode adicionar um segundo conn.update para registrar qual plano ele escolheu!
-        st.write(f"Excelente escolha, {dados['nome']}! Nossa equipe entrará em contato via WhatsApp ({dados['whatsapp']}) em breve.")
+    # As 4 ofertas do seu Funil
+    col1, col2 = st.columns(2)
     
-    if st.button("Refazer Cálculo"):
-        st.session_state.etapa = 1
-        st.rerun()
+    with col1:
+        if st.button("📄 Relatório + Plano de Ação"):
+            st.info("Solicitação enviada! Gerando seu PDF...")
+            
+    with col2:
+        if st.button("💻 Plano SaaS (12 meses)"):
+            st.info("Excelente! Ativando seu acesso ao software...")
+
+    if st.button("🤝 Falar com Advisor (M&A)"):
+        st.success("Prioridade máxima! Kaio ou um consultor Quintes entrará em contato em instantes.")
