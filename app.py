@@ -51,22 +51,22 @@ if query_params:
     
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("📄 Relatório + Plano de Ação"):
+        if st.button("Relatório + Plano de Ação"):
             st.success("Solicitação enviada! Verifique seu e-mail em instantes.")
     with col2:
-        if st.button("💻 Software de Gestão (SaaS)"):
+        if st.button("Software de Gestão"):
             st.info("Iniciando setup da sua conta...")
 
-    if st.button("🤝 Falar com Advisor (M&A)"):
+    if st.button("Entre em contato conosco"):
         st.warning("Chamando um consultor Quintes Capital agora mesmo!")
 
 else:
     # --- PÁGINA INICIAL (Caso acessem o link sem preencher o formulário) ---
     st.image("https://images.unsplash.com/photo-1551288049-bbda48336ad9?auto=format&fit=crop&q=80&w=400", width=200) # Imagem ilustrativa
     st.title("Quintes Capital")
-    st.write("Seja bem-vindo ao portal de Valuation para Provedores de Internet.")
+    st.write("Valuation Telecom 2026")
     st.write("Para calcular o valor da sua empresa, clique no botão abaixo:")
     
     # Substitua pelo seu link real do Fillout
     link_do_fillout = "https://forms.fillout.com/t/1qwGDDvuKKus" 
-    st.markdown(f'<a href="{link_do_fillout}" target="_self"><button style="width:100%; height:50px; cursor:pointer; background-color:#007BFF; color:white; border:none; border-radius:5px; font-size:18px; font-weight:bold;">Começar Análise Gratuita 🚀</button></a>', unsafe_allow_html=True)
+    st.markdown(f'<a href="{link_do_fillout}" target="_self"><button style="width:100%; height:50px; cursor:pointer; background-color:#007BFF; color:white; border:none; border-radius:5px; font-size:18px; font-weight:bold;">Começar Análise</button></a>', unsafe_allow_html=True)
