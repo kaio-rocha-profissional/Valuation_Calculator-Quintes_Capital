@@ -11,45 +11,40 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- CAPTAÇÃO DE DADOS DA URL (Vindo do Fillout) ---
+import streamlit as st
+
+# --- CAPTAÇÃO DA URL ---
 query_params = st.query_params
 
+# Dados de Contato/Empresa
 nome = query_params.get("nome", "Investidor")
 empresa = query_params.get("empresa", "sua empresa")
-ebitda = float(query_params.get("ebitda", 0))
-assinantes = int(query_params.get("assinantes", 0))
+cargo = query_params.get("cargo", "Sócio")
+telefone = query_params.get("tel", "")
+email = query_params.get("email", "")
+local = query_params.get("local", "")
 
-# Se não houver dados na URL, mostramos a Landing Page inicial
-if ebitda == 0:
-    st.image("https://seu-logo-aqui.com/logo.png", width=200) # Opcional: coloque seu logo
-    st.title("Descubra o valor de mercado do seu Provedor")
-    st.write("A Quintes Capital ajuda você a entender o real potencial da sua operação através de métricas precisas de M&A.")
+# Variáveis de Cálculo (Convertendo para números)
+try:
+    assinantes = int(query_params.get("assinantes", 0))
+    ticket_medio = float(query_params.get("ticket", 0))
+    receita_mes = float(query_params.get("receita", 0))
+except:
+    assinantes = ticket_medio = receita_mes = 0
+
+# --- LÓGICA DE VALUATION QUINTES CAPITAL ---
+if receita_mes > 0:
+    # 1. Cálculo por Múltiplo de Faturamento (Comum no setor: 1.5x a 3x a receita anual)
+    receita_anual = receita_mes * 12
+    valuation_faturamento = receita_anual * 2.5 # Usando múltiplo conservador de 2.5x
     
-    # BOTÃO QUE LEVA PARA O FILLOUT
-    link_fillout = "https://forms.fillout.com/t/seulinkdoform" # COLOQUE SEU LINK AQUI
-    st.markdown(f'<a href="{link_fillout}" target="_self"><button style="width:100%; height:50px; cursor:pointer; background-color:#007BFF; color:white; border:none; border-radius:5px; font-size:18px;">Começar Valuation Gratuito 🚀</button></a>', unsafe_allow_html=True)
-
+    # 2. Cálculo por Base de Assinantes (Ex: R$ 2.000 por assinante)
+    valuation_base = assinantes * 2000
+    
+    # Resultado Final: Média ponderada entre os dois métodos
+    valuation_final = (valuation_faturamento + valuation_base) / 2
 else:
-    # --- LÓGICA DE CÁLCULO M&A QUINTES ---
-    # Usando a média: (7x EBITDA + R$2000 por assinante) / 2
-    val_ebitda = ebitda * 7
-    val_base = assinantes * 2000
-    valuation_final = (val_ebitda + val_base) / 2 if assinantes > 0 else val_ebitda
-
-    # --- TELA DE RESULTADO ---
-    st.balloons()
-    st.subheader(f"Olá, {nome}! Aqui está a análise da {empresa}:")
-    
-    st.markdown(f"""
-        <div style="background-color: white; padding: 30px; border-radius: 10px; border-left: 10px solid #007BFF; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
-            <h4 style="color: #555;">Valuation Estimado (Cortesia)</h4>
-            <h1 style="color: #007BFF;">R$ {valuation_final:,.2f}</h1>
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.divider()
-    
-    st.subheader("Escolha como deseja evoluir este resultado:")
+    valuation_final = 0
     
     # As 4 ofertas do seu Funil
     col1, col2 = st.columns(2)
