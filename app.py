@@ -13,38 +13,27 @@ st.markdown("""
 
 import streamlit as st
 
-# --- CAPTAÇÃO DA URL ---
+import streamlit as st
+
+# --- CAPTAÇÃO DA URL (Ajustada para o seu novo formulário) ---
 query_params = st.query_params
 
-# Dados de Contato/Empresa
+# Puxando os dados (se não existirem, usa o padrão entre aspas)
 nome = query_params.get("nome", "Investidor")
 empresa = query_params.get("empresa", "sua empresa")
 cargo = query_params.get("cargo", "Sócio")
-telefone = query_params.get("tel", "")
-email = query_params.get("email", "")
-local = query_params.get("local", "")
+local = query_params.get("local", "") # Vai pegar o Estado/UF
 
-# Variáveis de Cálculo (Convertendo para números)
+# Variáveis de Cálculo com tratamento de erro
 try:
-    assinantes = int(query_params.get("assinantes", 0))
+    # O Fillout pode mandar pontos/vírgulas, limpamos isso aqui
+    assinantes = int(float(query_params.get("assinantes", 0)))
     ticket_medio = float(query_params.get("ticket", 0))
     receita_mes = float(query_params.get("receita", 0))
 except:
     assinantes = ticket_medio = receita_mes = 0
 
-# --- LÓGICA DE VALUATION QUINTES CAPITAL ---
-if receita_mes > 0:
-    # 1. Cálculo por Múltiplo de Faturamento (Comum no setor: 1.5x a 3x a receita anual)
-    receita_anual = receita_mes * 12
-    valuation_faturamento = receita_anual * 2.5 # Usando múltiplo conservador de 2.5x
-    
-    # 2. Cálculo por Base de Assinantes (Ex: R$ 2.000 por assinante)
-    valuation_base = assinantes * 2000
-    
-    # Resultado Final: Média ponderada entre os dois métodos
-    valuation_final = (valuation_faturamento + valuation_base) / 2
-else:
-    valuation_final = 0
+# ... segue a lógica de cálculo que fizemos antes ...
     
     # As 4 ofertas do seu Funil
     col1, col2 = st.columns(2)
