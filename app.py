@@ -35,7 +35,7 @@ if query_params:
 
     # --- TELA DE RESULTADO ---
     st.balloons()
-    st.title("📊 Seu Valuation está pronto!")
+    st.title("Seu Valuation")
     st.subheader(f"Análise exclusiva para: {empresa}")
     
     st.markdown(f"""
