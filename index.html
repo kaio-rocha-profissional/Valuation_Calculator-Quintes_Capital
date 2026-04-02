@@ -6,7 +6,7 @@
     <title>Valuation Intelligence | Quintes Capital</title>
     <link rel="icon" href="https://quintes.com.br/wp-content/uploads/2023/07/Favicon-Quintes.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -14,83 +14,104 @@
             background: radial-gradient(circle at top right, #0a192f, #02060c);
             color: #FFFFFF; 
             font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Evita scroll desnecessário na landing */
+            overflow-x: hidden;
         }
 
-        /* Animação Cinematográfica */
+        /* Animação Suave */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
-            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .page { 
             display: none; 
-            height: 100vh; 
+            min-height: 100vh; 
             width: 100vw;
-            animation: fadeIn 1.5s ease-out forwards; 
+            animation: fadeIn 1.2s ease-out forwards; 
         }
 
         .active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
-        /* Landing Page - Sem GAPs */
+        /* Landing Page - Layout Central */
         .hero-container { 
             text-align: center; 
-            max-width: 900px; 
-            padding: 0 20px;
-            margin-top: -5vh; /* Ajuste fino para centralização visual perfeita */
+            max-width: 1100px; 
+            padding: 40px 20px;
         }
 
-        .logo-main { width: 220px; height: auto; margin-bottom: 40px; }
+        .logo-main { width: 200px; margin-bottom: 30px; }
 
         .hero-title {
-            font-weight: 800; font-size: clamp(2.5rem, 5vw, 3.8rem); letter-spacing: -2px; line-height: 1.1;
+            font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: -2px; line-height: 1.1;
             margin-bottom: 20px; background: linear-gradient(to right, #ffffff, #94a3b8);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .subheadline { font-size: 1.2rem; color: #a8b2d1; margin-bottom: 45px; font-weight: 300; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .subheadline { font-size: 1.15rem; color: #a8b2d1; margin-bottom: 40px; font-weight: 300; max-width: 600px; margin-left: auto; margin-right: auto; }
 
         /* Botão Premium */
         .btn-premium {
             background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
-            color: white; border: none; padding: 20px 60px; border-radius: 50px;
+            color: white; border: none; padding: 18px 50px; border-radius: 50px;
             font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-            cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            cursor: pointer; transition: all 0.4s ease; 
             box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            text-decoration: none;
+            text-decoration: none; font-size: 0.9rem;
         }
-        .btn-premium:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5); }
+        .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5); }
 
-        /* Powered By Section */
-        .footer-powered { margin-top: 80px; text-align: center; }
-        .powered-text { font-size: 0.65rem; letter-spacing: 3px; color: #475569; text-transform: uppercase; margin-bottom: 15px; }
-        .footer-logo { width: 200px; filter: brightness(0) invert(1); opacity: 0.8; }
-
-        /* Iframe Fullscreen */
-        #iframe-container { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #000; z-index: 9999; display: none; 
+        /* SEÇÃO DE INSIGHTS (HORIZONTAL) */
+        .benefits-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
         }
+        .benefit-item {
+            flex: 1;
+            max-width: 220px;
+            text-align: left;
+        }
+        .benefit-item h4 {
+            font-size: 0.85rem;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .benefit-item p {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        /* Rodapé Powered By */
+        .footer-powered { margin-top: 60px; opacity: 0.6; text-align: center; }
+        .powered-text { font-size: 0.6rem; letter-spacing: 2px; color: #475569; text-transform: uppercase; }
+        .footer-logo { width: 160px; filter: brightness(0) invert(1); margin-top: 8px; }
+
+        /* Iframe */
+        #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* Card de Resultado (Etapa 3) */
+        /* Etapa de Resultado */
         .res-card {
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 40px;
-            padding: 60px 40px; margin: 40px 0; width: 100%; max-width: 700px;
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px;
+            padding: 50px 30px; margin: 30px 0; width: 100%; max-width: 600px;
         }
-        .res-value { font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; letter-spacing: -3px; margin: 10px 0; }
-        
-        .grid-passos { 
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; 
-            width: 100%; max-width: 900px; margin-top: 20px;
-        }
-        .btn-small { padding: 15px 20px; font-size: 0.8rem; border-radius: 12px; }
+        .res-value { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 800; letter-spacing: -2px; }
 
-        @media (max-width: 768px) {
-            .grid-passos { grid-template-columns: 1fr; }
-            body { overflow-y: auto; }
-            .page { height: auto; padding: 40px 0; }
+        @media (max-width: 850px) {
+            .benefits-grid { flex-direction: column; align-items: center; gap: 20px; }
+            .benefit-item { text-align: center; max-width: 100%; }
+            .benefit-item h4 { justify-content: center; }
         }
     </style>
 </head>
@@ -99,84 +120,75 @@
     <!-- ETAPA 1: LANDING PAGE -->
     <div id="etapa1" class="page active">
         <div class="hero-container">
-            <!-- Logo com Fallback de Erro -->
-            <img src="https://quintes.com.br/wp-content/uploads/2023/07/Logo-Branca-Simbolo-Preto-Texto.png" 
-                 class="logo-main" alt="Quintes Capital" onerror="this.style.display='none'">
+            <img src="https://quintes.com.br/wp-content/uploads/2023/07/Logo-Branca-Simbolo-Preto-Texto.png" class="logo-main" alt="Quintes">
             
-            <p style="color:#3b82f6; font-weight:700; letter-spacing:3px; font-size:0.8rem; text-transform:uppercase;">Estratégia & Inteligência</p>
+            <p style="color:#3b82f6; font-weight:700; letter-spacing:3px; font-size:0.75rem; text-transform:uppercase; margin-bottom:10px;">Corporate Advisory</p>
             <h1 class="hero-title">Quanto vale o esforço<br>de uma vida inteira?</h1>
-            <p class="subheadline">Descubra o valor de mercado real da sua empresa com inteligência de dados e metodologia de M&A.</p>
+            <p class="subheadline">Tenha uma visão clara do valor de mercado da sua operação com nossa inteligência em M&A.</p>
             
             <button class="btn-premium" onclick="irParaEtapa2()">CALCULAR VALUATION</button>
-            
+
+            <!-- NOVA SEÇÃO: POR QUE FAZER O SEU VALUATION? -->
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <h4><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/><path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg> M&A e Venda</h4>
+                    <p>Esteja preparado para negociações de saída ou fusões estratégicas.</p>
+                </div>
+                <div class="benefit-item">
+                    <h4><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM5 5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5zm-4 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9z"/></svg> Captação</h4>
+                    <p>Apresente indicadores sólidos para atrair novos sócios ou investidores.</p>
+                </div>
+                <div class="benefit-item">
+                    <h4><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg> Gestão</h4>
+                    <p>Identifique os pontos críticos que destroem o valor da sua empresa.</p>
+                </div>
+            </div>
+
             <div class="footer-powered">
                 <p class="powered-text">Powered by</p>
-                <img src="https://i.imgur.com/8N4U9M6.png" class="footer-logo" alt="Quintes Advisory">
+                <img src="https://i.imgur.com/8N4U9M6.png" class="footer-logo">
             </div>
         </div>
     </div>
 
-    <!-- ETAPA 2: FORMULÁRIO EM TELA CHEIA -->
+    <!-- ETAPA 2: IFRAME FULLSCREEN -->
     <div id="iframe-container">
-        <iframe id="fillout-frame" src="https://forms.fillout.com/t/1qwGDDvuKKus" allow="camera; microphone; geolocation"></iframe>
+        <iframe src="https://forms.fillout.com/t/1qwGDDvuKKus" allow="camera; microphone; geolocation"></iframe>
     </div>
 
     <!-- ETAPA 3: RESULTADO -->
     <div id="etapa3" class="page">
         <div class="hero-container">
             <img src="https://quintes.com.br/wp-content/uploads/2023/07/Logo-Branca-Simbolo-Preto-Texto.png" width="140" alt="Logo">
-            
             <div class="res-card">
-                <div id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.8rem;">Avaliação Estimada</div>
+                <div id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:2px; text-transform:uppercase; font-size:0.8rem; margin-bottom:10px;">Valuation Estimado</div>
                 <div class="res-value">
-                    <span style="font-size:1.8rem; color:#64748b; margin-right:10px;">R$</span><span id="res-valor">0</span>
+                    <span style="font-size:1.5rem; color:#64748b; margin-right:5px;">R$</span><span id="res-valor">0</span>
                 </div>
-                <p style="color:#64748b; font-size:1.1rem;">Baseado em Múltiplo Setorial de <b>6.0x EBITDA</b></p>
+                <p style="color:#64748b; font-size:1rem; margin-top:15px;">Múltiplo de <b>6.0x EBITDA</b></p>
             </div>
-            
-            <h2 style="font-size:1.8rem; font-weight:700; margin-bottom:30px;">Próximos Passos Estratégicos</h2>
-            <div class="grid-passos">
-                <button class="btn-premium btn-small">BAIXAR RELATÓRIO</button>
-                <button class="btn-premium btn-small">VER DASHBOARD</button>
-                <button class="btn-premium btn-small">FALAR COM ADVISOR</button>
-            </div>
-            
-            <button onclick="window.location.href=window.location.pathname" style="margin-top:40px; background:none; border:none; color:#64748b; cursor:pointer; text-decoration:underline; font-size:0.9rem;">REFAZER DIAGNÓSTICO</button>
+            <button onclick="window.location.href=window.location.pathname" class="btn-premium">REFAZER DIAGNÓSTICO</button>
         </div>
     </div>
 
     <script>
-        // 1. Lógica para detectar parâmetros da URL (vindo do redirecionamento do Fillout)
+        // Lógica de Redirecionamento
         window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const ebitda = urlParams.get('ebitda');
-            const empresa = urlParams.get('empresa');
-
+            const params = new URLSearchParams(window.location.search);
+            const ebitda = params.get('ebitda');
             if (ebitda) {
-                mostrarEtapa3(ebitda, empresa);
+                document.getElementById('etapa1').style.display = 'none';
+                document.getElementById('etapa3').classList.add('active');
+                const val = parseFloat(ebitda) * 6;
+                document.getElementById('res-valor').innerText = val.toLocaleString('pt-BR');
+                const emp = params.get('empresa');
+                if(emp) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${emp}`;
             }
         };
 
         function irParaEtapa2() {
             document.getElementById('etapa1').style.display = 'none';
             document.getElementById('iframe-container').style.display = 'block';
-        }
-
-        function mostrarEtapa3(ebitda, empresa) {
-            // Esconde Landing e Iframe
-            document.getElementById('etapa1').style.display = 'none';
-            document.getElementById('iframe-container').style.display = 'none';
-            
-            // Ativa Etapa 3
-            const etapa3 = document.getElementById('etapa3');
-            etapa3.classList.add('active');
-            
-            // Cálculo
-            const valorCalculado = parseFloat(ebitda) * 6;
-            document.getElementById('res-valor').innerText = valorCalculado.toLocaleString('pt-BR');
-            if(empresa) {
-                document.getElementById('res-empresa').innerText = `Avaliação Estimada • ${empresa}`;
-            }
         }
     </script>
 </body>
