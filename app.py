@@ -153,4 +153,4 @@ elif st.session_state.etapa == 3:
         st.markdown('<div class="offer-box"><h3>Relatório Premium</h3><p>Análise completa de indicadores financeiros.</p></div>', unsafe_allow_html=True)
         st.button("RECEBER PDF", key="opt1")
     with c2:
-        st.markdown('<div
+        st.markdown('<div>', unsafe_allow_html=True)
