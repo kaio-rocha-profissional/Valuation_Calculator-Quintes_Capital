@@ -22,14 +22,22 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
         .page { display: none; min-height: 100vh; width: 100vw; animation: fadeIn 1.2s ease-out forwards; }
-        .active { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        
+        /* Ajuste de centralização e espaço no topo */
+        .active { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-start; /* Alinha ao topo */
+            padding: 120px 20px 60px 20px; /* 120px de espaço no topo */
+        }
 
         /* --- LANDING PAGE --- */
         .hero-container { text-align: center; max-width: 1000px; }
         
         .hero-title { 
             font-weight: 800; 
-            font-size: clamp(2.2rem, 5vw, 3.8rem); 
+            font-size: clamp(2.2rem, 5.5vw, 4rem); 
             letter-spacing: -2px; 
             line-height: 1.1; 
             margin-bottom: 25px; 
@@ -58,23 +66,32 @@
         }
         .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5); }
 
-        /* --- INSIGHTS --- */
+        /* --- BENEFÍCIOS --- */
         .benefits-grid {
             display: flex; justify-content: center; gap: 30px; margin-top: 80px;
-            padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); width: 100%;
+            padding-top: 50px; border-top: 1px solid rgba(255, 255, 255, 0.05); width: 100%;
         }
         .benefit-item { flex: 1; max-width: 250px; text-align: left; }
         .benefit-item h4 { font-size: 0.8rem; color: #3b82f6; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
         .benefit-item p { font-size: 0.85rem; color: #64748b; line-height: 1.5; }
 
-        /* --- RESULTADOS E PLANOS --- */
+        /* --- FOOTER TEXTUAL --- */
+        .footer-text-brand { margin-top: 100px; text-align: center; opacity: 0.6; padding-bottom: 40px; }
+        .pwr-by { font-size: 0.6rem; letter-spacing: 4px; color: #475569; text-transform: uppercase; margin-bottom: 15px; }
+        .f-brand-main { font-weight: 700; font-size: 1.3rem; letter-spacing: 10px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
+        .f-brand-sub { font-weight: 400; font-size: 0.55rem; letter-spacing: 8px; text-transform: uppercase; color: #475569; }
+
+        /* Iframe Fullscreen */
+        #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* --- ETAPA 3: RESULTADOS --- */
         .valuation-badge {
             background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 50px 20px; border-radius: 30px; margin-bottom: 50px; width: 100%; max-width: 750px; text-align: center;
+            padding: 60px 20px; border-radius: 40px; margin-bottom: 50px; width: 100%; max-width: 750px; text-align: center;
         }
         .valuation-value { font-size: clamp(3.5rem, 9vw, 5.5rem); font-weight: 800; letter-spacing: -3px; margin: 10px 0; }
-        .stats-summary { color: #64748b; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
-
+        
         .plans-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px; width: 100%; max-width: 1100px;
@@ -97,17 +114,8 @@
         .btn-plan:hover { background: #fff; color: #000; }
         .featured .btn-plan { background: #3b82f6; border: none; }
 
-        /* --- FOOTER TEXTUAL --- */
-        .footer-text-brand { margin-top: 100px; text-align: center; opacity: 0.7; padding-bottom: 40px; }
-        .pwr-by { font-size: 0.6rem; letter-spacing: 4px; color: #475569; text-transform: uppercase; margin-bottom: 15px; }
-        .f-brand-main { font-weight: 700; font-size: 1.3rem; letter-spacing: 10px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
-        .f-brand-sub { font-weight: 400; font-size: 0.55rem; letter-spacing: 8px; text-transform: uppercase; color: #475569; }
-
-        /* Iframe */
-        #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; }
-        iframe { width: 100%; height: 100%; border: none; }
-
         @media (max-width: 850px) {
+            .active { padding-top: 80px; }
             .hero-title { font-size: 2.6rem; }
             .benefits-grid { flex-direction: column; align-items: center; text-align: center; gap: 40px; }
         }
@@ -138,7 +146,6 @@
                 </div>
             </div>
 
-            <!-- FOOTER DISCRETO -->
             <div class="footer-text-brand">
                 <p class="pwr-by">Powered by</p>
                 <div class="f-brand-main">Quintes Capital</div>
@@ -152,13 +159,12 @@
         <iframe id="fillout-frame" src="https://forms.fillout.com/t/1qwGDDvuKKus"></iframe>
     </div>
 
-    <!-- ETAPA 3: RESULTADOS E PLANOS -->
+    <!-- ETAPA 3: RESULTADOS -->
     <div id="etapa3" class="page">
         <div class="hero-container" style="max-width: 1200px;">
-            
             <div class="valuation-badge">
                 <p id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.75rem; margin-bottom:15px;">Avaliação Estimada</p>
-                <div class="stats-summary" id="stats-text">Análise de Performance Recorrente</div>
+                <div style="color: #64748b; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;" id="stats-text">Análise de Performance Recorrente</div>
                 <div class="valuation-value">
                     <span style="font-size:1.5rem; color:#64748b; margin-right:10px;">R$</span><span id="res-valor">0</span>
                 </div>
@@ -212,21 +218,20 @@
         window.onload = function() {
             const params = new URLSearchParams(window.location.search);
             const receitaMensal = params.get('receita');
-            const empresa = params.get('empresa');
-            const assinantes = params.get('assinantes');
-
             if (receitaMensal) {
                 document.getElementById('etapa1').style.display = 'none';
-                document.getElementById('etapa3').classList.add('active');
+                const etapa3 = document.getElementById('etapa3');
+                etapa3.classList.add('active');
+                etapa3.style.paddingTop = "60px"; // Menos espaço no topo para o resultado
                 
-                // Limpeza e cálculo: Receita Mensal * 12 * 6
                 const receitaNum = parseFloat(receitaMensal.replace(/[^0-9.,]/g, '').replace(',', '.'));
                 const valTotal = (receitaNum * 12) * 6;
-                
                 document.getElementById('res-valor').innerText = valTotal.toLocaleString('pt-BR', {maximumFractionDigits: 0});
                 
-                if(empresa) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${empresa}`;
-                if(assinantes) document.getElementById('stats-text').innerText = `${assinantes} Assinantes • R$ ${receitaNum.toLocaleString('pt-BR')}/mês`;
+                const emp = params.get('empresa');
+                const ass = params.get('assinantes');
+                if(emp) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${emp}`;
+                if(ass) document.getElementById('stats-text').innerText = `${ass} Assinantes • R$ ${receitaNum.toLocaleString('pt-BR')}/mês`;
             }
         };
 
