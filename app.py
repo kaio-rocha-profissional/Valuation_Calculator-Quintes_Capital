@@ -3,299 +3,154 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 from datetime import datetime
 
-# --- CONFIGURAÇÃO DA PÁGINA (Precisa ser a primeira linha) ---
+# --- CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(
     page_title="Valuation Cortesia | Quintes Capital", 
-    layout="centered", # Centralizado como na imagem de referência
-    page_icon="https://quintes.com.br/wp-content/uploads/2023/07/Favicon-Quintes.png" # Logo Quintes
+    layout="centered", 
+    page_icon="https://quintes.com.br/wp-content/uploads/2023/07/Favicon-Quintes.png"
 )
 
-# Conexão com o Google Sheets (Para salvar o lead - prospecção inversa)
-conn = st.connection("gsheets", type=GSheetsConnection)
-
-# --- SESSÃO DE CONTROLE (Para saber em qual etapa o usuário está) ---
-if 'etapa' not in st.session_state:
-    st.session_state.etapa = 1
-
 # --- ESTILIZAÇÃO CUSTOMIZADA (CSS) ---
-# Aqui fazemos a "mágica" para imitar as cores, fontes e estilo da sua referência.
-# Cores da Quintes: Preto, Branco, Azul Claro e Roxo/Dourado.
 st.markdown("""
     <style>
-    /* Importando Fontes (Google Fonts) */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
     
-    /* Configurações Globais */
     .stApp {
-        background-color: #ffffff; /* Fundo Branco Limpo */
-        color: #1a1a1a; /* Texto Preto Suave */
+        background-color: #ffffff;
+        color: #1a1a1a;
         font-family: 'Poppins', sans-serif;
     }
     
-    /* Hero Section (A parte de cima) */
+    /* Hero Section */
     .hero-container {
         text-align: center;
-        padding: 60px 0;
-        margin-bottom: 30px;
+        padding: 40px 0 20px 0;
     }
     
     .logo-img {
-        width: 150px;
+        width: 180px;
         margin-bottom: 20px;
     }
     
     .hero-title {
-        color: #007bff; /* Azul Quintes */
-        font-weight: 700;
-        font-size: 3.5rem; /* Fonte grande como na referência */
-        line-height: 1.1;
-        margin-bottom: 10px;
-    }
-    
-    .hero-title span {
-        font-weight: 400; /* Parte "cortesia" mais fina */
-    }
-    
-    .hero-subtitle {
-        color: #555555; /* Texto cinza suave */
-        font-size: 1.2rem;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    /* Formulário Customizado */
-    div.stForm {
-        background-color: #f9f9f9; /* Fundo do formulário cinza muito claro */
-        border: 1px solid #eeeeee;
-        border-radius: 15px;
-        padding: 30px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Sombra suave */
-    }
-    
-    /* Inputs de Texto */
-    div.stForm .stTextInput > div > div > input,
-    div.stForm .stNumberInput > div > div > input,
-    div.stForm .stSelectbox > div > div > select {
-        border-radius: 10px;
-        border: 1px solid #dddddd;
-        padding: 10px;
-        height: 50px;
-    }
-    
-    div.stForm label {
-        color: #1a1a1a !important;
-        font-weight: 600;
-    }
-    
-    /* Botão Principal */
-    div.stForm .stButton>button {
-        background-color: #007bff; /* Azul Quintes */
-        color: white;
-        border-radius: 50px; /* Arredondado como o botão da imagem */
-        height: 55px;
-        width: 100%;
-        font-weight: 700;
-        font-size: 1.1rem;
-        border: none;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    }
-    
-    div.stForm .stButton>button:hover {
-        background-color: #0056b3; /* Azul mais escuro no hover */
-        transform: translateY(-2px);
-    }
-    
-    /* TELA DE RESULTADO (Etapa 2) */
-    .valuation-box {
-        text-align: center;
-        margin-top: 50px;
-    }
-    
-    .valuation-title {
-        font-weight: 700;
         color: #007bff;
-        font-size: 2.2rem;
-        margin-bottom: 20px;
+        font-weight: 700;
+        font-size: 3rem;
+        line-height: 1.1;
+        margin-bottom: 15px;
     }
     
+    .hero-title span { font-weight: 300; color: #1a1a1a; }
+    
+    /* Cards de Valuation e Ofertas */
+    .valuation-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        border: 1px solid #dee2e6;
+        margin-bottom: 30px;
+    }
+
     .valuation-value {
-        font-size: 4rem;
-        font-weight: 700;
-        color: #1a1a1a;
-        line-height: 1;
-        margin-bottom: 10px;
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #007bff;
+        margin: 10px 0;
     }
-    
-    .valuation-info {
-        color: #555;
-        font-size: 1rem;
-        margin-bottom: 40px;
+
+    /* Ajuste para Mobile */
+    @media (max-width: 600px) {
+        .hero-title { font-size: 2rem; }
+        .valuation-value { font-size: 2.2rem; }
     }
-    
-    /* Título das Ofertas */
-    .plans-title {
-        text-align: center;
-        font-weight: 700;
-        font-size: 2.5rem;
-        color: #1a1a1a;
-        margin-bottom: 40px;
-    }
-    
-    /* Ofertas Customizadas (Adaptando o visual dos cards da referência) */
-    div[data-testid="stHorizontalBlock"] > div > div {
-        background-color: #ffffff;
-        border: 1px solid #eeeeee;
+
+    /* Estilo dos Cards de Oferta */
+    .offer-card {
+        border: 1px solid #eee;
         border-radius: 15px;
-        padding: 25px;
+        padding: 20px;
         text-align: center;
-        transition: all 0.3s ease;
+        height: 100%;
+        transition: 0.3s;
     }
-    
-    div[data-testid="stHorizontalBlock"] > div > div:hover {
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        transform: translateY(-5px);
+    .offer-card:hover {
         border-color: #007bff;
+        box-shadow: 0 10px 20px rgba(0,123,255,0.1);
     }
-    
-    /* Botões dentro das ofertas */
-    div[data-testid="stHorizontalBlock"] .stButton>button {
-        background-color: #f9f9f9;
-        color: #1a1a1a;
-        border: 1px solid #dddddd;
-        border-radius: 50px;
-        margin-top: 15px;
-    }
-    
-    div[data-testid="stHorizontalBlock"] .stButton>button:hover {
-        background-color: #007bff;
-        color: white;
-        border-color: #007bff;
-    }
-    
-    /* Botão Falar com Consultor */
-    .special-btn > div > div > button {
-        background-color: #007bff !important;
-        color: white !important;
-        border: none !important;
-        width: 100% !important;
-        margin-top: 20px !important;
-        height: 50px !important;
-        border-radius: 50px !important;
-        font-weight: 700;
-    }
-    
-    .special-btn > div > div > button:hover {
-        background-color: #0056b3 !important;
-    }
-    
     </style>
     """, unsafe_allow_html=True)
 
+# --- CONTROLE DE SESSÃO ---
+if 'etapa' not in st.session_state:
+    st.session_state.etapa = 1
 
-# --- ETAPA 1: CAPTAÇÃO E CÁLCULO (Adaptada para o novo Layout) ---
+# --- ETAPA 1: LANDING PAGE & FORMULÁRIO ---
 if st.session_state.etapa == 1:
-    
-    # Hero Section Customizada com Logo Quintes
     st.markdown("""
         <div class="hero-container">
             <img src="https://quintes.com.br/wp-content/uploads/2023/07/Logo-Branca-Simbolo-Preto-Texto.png" class="logo-img">
-            <h1 class="hero-title">Sua Análise de<br>Market Share <span>Cortesia</span></h1>
-            <p class="hero-subtitle">Descubra o valuation da sua operação telecom de forma instantânea e gratuita.</p>
+            <h1 class="hero-title">Valuation <span>Cortesia</span></h1>
+            <p style="font-size:1.2rem; color:#666;">Descubra agora quanto vale sua operação de Telecom.</p>
         </div>
     """, unsafe_allow_html=True)
 
     with st.form("form_captacao"):
         col1, col2 = st.columns(2)
-        
         with col1:
-            nome = st.text_input("Seu Nome *")
-            email = st.text_input("E-mail Corporativo *")
-            empresa = st.text_input("Nome do Provedor *")
+            nome = st.text_input("Seu Nome")
+            empresa = st.text_input("Nome do Provedor")
+            ebitda_anual = st.number_input("EBITDA Anual (R$)", min_value=0.0, format="%.2f")
         with col2:
-            whatsapp = st.text_input("WhatsApp (com DDD) *")
-            uf = st.selectbox("Estado", ["SP", "RJ", "MG", "PR", "SC", "RS", "Outro"])
+            whatsapp = st.text_input("WhatsApp")
             assinantes = st.number_input("Qtd de Assinantes", min_value=0)
-
-        col3, col4 = st.columns(2)
-        with col3:
-            ebitda_anual = st.number_input("EBITDA Anual (R$)", min_value=0.0)
-             churn = st.slider("Churn Rate Mensal (%)", 0.0, 10.0, 1.5)
-        with col4:
-            mrr = st.number_input("Receita Mensal (MRR)", min_value=0.0)
-            ticket_medio = st.number_input("Ticket Médio (ARPU)", min_value=0.0)
-
-        submit = st.form_submit_button("Gerar meu Valuation Cortesia 🚀")
+            mrr = st.number_input("Receita Mensal (MRR)", min_value=0.0, format="%.2f")
+        
+        submit = st.form_submit_button("CALCULAR VALUATION AGORA 🚀")
 
         if submit:
-            if not nome or not email or ebitda_anual == 0:
-                st.error("Por favor, preencha os dados essenciais para o cálculo.")
-            else:
-                # LÓGICA DE CÁLCULO M&A
-                valuation_estimado = ebitda_anual * 6 
-                
-                # SALVANDO NA SESSÃO
+            if ebitda_anual > 0:
+                # Lógica simplificada: Multiplo de 6x EBITDA
                 st.session_state.dados_cliente = {
-                    "nome": nome, "empresa": empresa, "whatsapp": whatsapp,
-                    "ebitda": ebitda_anual, "valuation": valuation_estimado
+                    "empresa": empresa,
+                    "valuation": ebitda_anual * 6
                 }
                 st.session_state.etapa = 2
                 st.rerun()
+            else:
+                st.warning("Insira o EBITDA para calcular.")
 
-# --- ETAPA 2: RESULTADO E CONVERSÃO (Adaptada para o novo Layout) ---
+# --- ETAPA 2: RESULTADO E CONVERSÃO ---
 elif st.session_state.etapa == 2:
-    dados = st.session_state.dados_cliente
+    d = st.session_state.dados_cliente
     
-    # Animação de Sucesso
-    st.balloons()
-    
-    # Valuation Detalhado Customizado
     st.markdown(f"""
-        <div class="valuation-box">
-            <h2 class="valuation-title">Valuation Estimado de {dados['empresa']}</h2>
-            <div class="valuation-value">R$ {dados['valuation']:,.2f}</div>
-            <p class="valuation-info">💡 Estimativa estática baseada em múltiplos de mercado Telecom atual.</p>
+        <div class="valuation-card">
+            <h2 style="margin:0; font-size:1.2rem; text-transform:uppercase; letter-spacing:2px;">Resultado Estimado</h2>
+            <div class="valuation-value">R$ {d['valuation']:,.2f}</div>
+            <p style="color:#666;">Empresa: <strong>{d['empresa']}</strong></p>
         </div>
     """, unsafe_allow_html=True)
-    
-    st.divider()
-    
-    # Título das Ofertas Customizado
-    st.markdown('<h2 class="plans-title">Como deseja evoluir este resultado?</h2>', unsafe_allow_html=True)
-    
-    # Três Opções Principais
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-            <h3 style="color:#007bff; font-weight:700;">Plano<br>Relatório</h3>
-            <p>PDF Completo com Check-up de Indicadores e Plano de Ação.</p>
-        """, unsafe_allow_html=True)
-        if st.button("Quero Relatório", key="b1"):
-            st.success("Solicitação enviada! Entraremos em contato.")
 
-    with col2:
-        st.markdown("""
-            <h3 style="color:#007bff; font-weight:700;">Plano<br>SaaS</h3>
-            <p>Acompanhamento mensal e acesso ilimitado ao Software.</p>
-        """, unsafe_allow_html=True)
-        if st.button("Quero Plano SaaS", key="b2"):
-            st.success("Setup da sua conta iniciado. Verifique seu e-mail.")
+    st.markdown("<h3 style='text-align:center; margin-bottom:30px;'>Como deseja evoluir este resultado?</h3>", unsafe_allow_html=True)
 
-    with col3:
-        st.markdown("""
-            <h3 style="color:#007bff; font-weight:700;">Advisor<br>M&A</h3>
-            <p>Pronto para vender? Mentoria particular de M&A.</p>
-        """, unsafe_allow_html=True)
-        if st.button("Quero Advisor", key="b3"):
-            st.success("Kaio ou um advisorQuint entrará em contato em instantes.")
-
-    # Botão de falar com consultor como rodapé
-    st.markdown('<div class="special-btn">', unsafe_allow_html=True)
-    if st.button("🤝 Falar com um Consultor Quintes"):
-        st.success("Sua solicitação foi enviada para nossa equipa M&A.")
-    st.markdown('</div>', unsafe_allow_html=True)
+    c1, c2, c3 = st.columns(3)
     
-    if st.button("Refazer Cálculo"):
+    with c1:
+        st.markdown("<div class='offer-card'><h4>📄 Relatório</h4><p>PDF detalhado com análise de KPIs.</p></div>", unsafe_allow_html=True)
+        if st.button("Obter PDF", use_container_width=True):
+            st.info("Redirecionando para checkout...")
+
+    with c2:
+        st.markdown("<div class='offer-card'><h4>💻 Plano SaaS</h4><p>Dashboard de Valuation em tempo real.</p></div>", unsafe_allow_html=True)
+        if st.button("Assinar Software", use_container_width=True):
+            st.info("Abrindo painel SaaS...")
+
+    with c3:
+        st.markdown("<div class='offer-card'><h4>🤝 Advisor M&A</h4><p>Consultoria para venda da operação.</p></div>", unsafe_allow_html=True)
+        if st.button("Falar com Advisor", use_container_width=True):
+            st.info("Chamando no WhatsApp...")
+
+    if st.button("← Refazer Cálculo", type="secondary"):
         st.session_state.etapa = 1
         st.rerun()
