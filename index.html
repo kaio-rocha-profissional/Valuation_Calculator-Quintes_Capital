@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado Valuation | Quintes Capital</title>
+    <title>Valuation Intelligence | Quintes Capital</title>
     <link rel="icon" href="https://quintes.com.br/wp-content/uploads/2023/07/Favicon-Quintes.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -20,72 +20,94 @@
 
         /* --- ANIMAÇÕES --- */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
-
+        
         .page { display: none; min-height: 100vh; width: 100vw; animation: fadeIn 1.2s ease-out forwards; }
         .active { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
 
+        /* --- LOGO EM TEXTO (BOUTIQUE STYLE) --- */
+        .brand-container { text-align: center; margin-bottom: 40px; }
+        .brand-main { 
+            font-weight: 800; 
+            font-size: 2.2rem; 
+            letter-spacing: 6px; 
+            text-transform: uppercase; 
+            line-height: 1;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .brand-sub { 
+            font-weight: 400; 
+            font-size: 0.75rem; 
+            letter-spacing: 5px; 
+            text-transform: uppercase; 
+            color: #475569;
+        }
+
         /* --- LANDING PAGE --- */
         .hero-container { text-align: center; max-width: 1000px; }
-        .logo-main { width: 180px; margin-bottom: 20px; }
-        .hero-title { font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-title { 
+            font-weight: 800; 
+            font-size: clamp(2.2rem, 5vw, 3.8rem); 
+            letter-spacing: -2px; 
+            line-height: 1.1; 
+            margin-bottom: 25px; 
+            background: linear-gradient(to right, #ffffff, #94a3b8); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        .subheadline { font-size: 1.2rem; color: #a8b2d1; margin-bottom: 50px; font-weight: 300; max-width: 650px; margin-left: auto; margin-right: auto; }
         
         .btn-premium {
             background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
-            color: white; border: none; padding: 18px 50px; border-radius: 50px;
+            color: white; border: none; padding: 20px 60px; border-radius: 50px;
             font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
             cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-            text-decoration: none; font-size: 0.85rem;
+            text-decoration: none; font-size: 0.9rem;
         }
         .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5); }
 
-        /* --- ESTILO DOS CARDS DE PLANOS (ETAPA 3) --- */
-        .res-header { text-align: center; margin-bottom: 40px; }
+        /* --- RESULTADOS E PLANOS (ETAPA 3) --- */
         .valuation-badge {
-            background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3);
-            padding: 40px; border-radius: 30px; margin-bottom: 50px; display: inline-block; width: 100%; max-width: 600px;
+            background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 50px 20px; border-radius: 30px; margin-bottom: 60px; width: 100%; max-width: 700px; text-align: center;
         }
-        .valuation-value { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 800; letter-spacing: -2px; color: #fff; }
+        .valuation-value { font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; letter-spacing: -3px; }
 
         .plans-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px; width: 100%; max-width: 1200px; margin-top: 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px; width: 100%; max-width: 1100px;
         }
-
         .plan-card {
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px;
-            padding: 40px 30px; text-align: left; transition: 0.3s;
-            display: flex; flex-direction: column; position: relative;
+            padding: 40px; text-align: left; transition: 0.3s; display: flex; flex-direction: column;
         }
-        .plan-card:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-10px); border-color: #3b82f6; }
+        .plan-card:hover { border-color: #3b82f6; transform: translateY(-5px); background: rgba(255, 255, 255, 0.05); }
+        .plan-card.featured { border: 2px solid #3b82f6; background: rgba(59, 130, 246, 0.03); }
         
-        .plan-card.featured { border: 2px solid #3b82f6; background: rgba(59, 130, 246, 0.05); }
-        .featured-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #3b82f6; color: white; padding: 4px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+        .plan-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: #3b82f6; text-transform: uppercase; letter-spacing: 1px; }
+        .plan-price { font-size: 2.2rem; font-weight: 800; margin-bottom: 25px; }
+        .plan-features { list-style: none; margin-bottom: 35px; flex-grow: 1; }
+        .plan-features li { font-size: 0.9rem; color: #94a3b8; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .plan-features li::before { content: "→"; color: #3b82f6; }
 
-        .plan-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: #fff; }
-        .plan-price { font-size: 2rem; font-weight: 800; margin-bottom: 20px; }
-        .plan-price span { font-size: 0.9rem; color: #64748b; font-weight: 400; }
-        
-        .plan-features { list-style: none; margin-bottom: 30px; flex-grow: 1; }
-        .plan-features li { font-size: 0.85rem; color: #a8b2d1; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-        .plan-features li::before { content: "✓"; color: #3b82f6; font-weight: bold; }
-
-        .btn-plan { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
-        .btn-plan:hover { background: white; color: black; }
+        .btn-plan { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-plan:hover { background: #fff; color: #000; }
         .featured .btn-plan { background: #3b82f6; border: none; }
-        .featured .btn-plan:hover { background: #2563eb; color: white; }
 
-        /* --- ESPECIALISTA --- */
-        .specialist-section { margin-top: 60px; text-align: center; padding: 40px; border-radius: 24px; background: rgba(255, 255, 255, 0.02); border: 1px dashed rgba(255, 255, 255, 0.1); width: 100%; max-width: 800px; }
+        /* --- FOOTER POWERED BY (TEXT ONLY) --- */
+        .footer-text-brand { margin-top: 100px; text-align: center; opacity: 0.8; }
+        .pwr-by { font-size: 0.6rem; letter-spacing: 3px; color: #475569; text-transform: uppercase; margin-bottom: 15px; }
+        .f-brand-main { font-weight: 700; font-size: 1.4rem; letter-spacing: 8px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
+        .f-brand-sub { font-weight: 400; font-size: 0.55rem; letter-spacing: 6px; text-transform: uppercase; color: #475569; }
 
-        /* --- Iframe --- */
+        /* Iframe */
         #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; }
         iframe { width: 100%; height: 100%; border: none; }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.2rem; }
-            .plans-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.5rem; }
+            .f-brand-main { font-size: 1rem; letter-spacing: 4px; }
         }
     </style>
 </head>
@@ -94,14 +116,22 @@
     <!-- ETAPA 1: LANDING PAGE -->
     <div id="etapa1" class="page active">
         <div class="hero-container">
-            <img src="https://quintes.com.br/wp-content/uploads/2023/07/Logo-Branca-Simbolo-Preto-Texto.png" class="logo-main" alt="Logo">
-            <h1 class="hero-title">O valor real do seu negócio<br>revelado com precisão.</h1>
-            <p style="font-size:1.2rem; color:#a8b2d1; margin-bottom:40px; font-weight:300;">Metodologia avançada de M&A para empresários que buscam clareza estratégica.</p>
-            <button class="btn-premium" onclick="irParaEtapa2()">CALCULAR VALUATION</button>
+            <!-- MARCA QUINTES (TEXTO) -->
+            <div class="brand-container">
+                <div class="brand-main">Quintes Capital</div>
+                <div class="brand-sub">Next Gen Advisory</div>
+            </div>
+
+            <h1 class="hero-title">Quanto vale o esforço<br>de uma vida inteira?</h1>
+            <p class="subheadline">Descubra o valor real da sua empresa com inteligência de mercado e metodologia de M&A.</p>
             
-            <div style="margin-top: 80px; opacity: 0.5;">
-                <p style="font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Powered by</p>
-                <img src="https://i.imgur.com/8N4U9M6.png" style="width: 160px; filter: brightness(0) invert(1);">
+            <button class="btn-premium" onclick="irParaEtapa2()">Calcular Valuation</button>
+            
+            <!-- FOOTER POWERED BY (TEXTO) -->
+            <div class="footer-text-brand">
+                <p class="pwr-by">Powered by</p>
+                <div class="f-brand-main">Quintes Capital</div>
+                <div class="f-brand-sub">Next Gen Advisory</div>
             </div>
         </div>
     </div>
@@ -111,98 +141,82 @@
         <iframe id="fillout-frame" src="https://forms.fillout.com/t/1qwGDDvuKKus"></iframe>
     </div>
 
-    <!-- ETAPA 3: RESULTADOS E OFERTAS -->
+    <!-- ETAPA 3: RESULTADOS E PLANOS -->
     <div id="etapa3" class="page">
-        <div class="res-header">
-            <img src="https://quintes.com.br/wp-content/uploads/2023/07/Logo-Branca-Simbolo-Preto-Texto.png" width="120" style="margin-bottom: 20px;">
-            <h2 style="font-size: 1.5rem; font-weight: 400; color: #a8b2d1;">Resultado da Análise Preliminar</h2>
-        </div>
-
-        <div class="valuation-badge">
-            <p id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Avaliação Estimada</p>
-            <div class="valuation-value">
-                <span style="font-size:1.5rem; color:#64748b; margin-right:10px;">R$</span><span id="res-valor">0</span>
-            </div>
-            <p style="color:#64748b; font-size:1rem; margin-top:15px;">Baseado em Múltiplo Setorial de <b>6.0x EBITDA</b></p>
-        </div>
-
-        <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 30px;">Escolha o nível de detalhamento</h3>
-
-        <div class="plans-grid">
-            <!-- Plano Básico -->
-            <div class="plan-card">
-                <div class="plan-name">Plano Básico</div>
-                <div class="plan-price">R$ 490 <span>/único</span></div>
-                <ul class="plan-features">
-                    <li>Relatório PDF Simplificado</li>
-                    <li>Cálculo de Múltiplos Base</li>
-                    <li>Certificado de Estimativa</li>
-                </ul>
-                <button class="btn-plan">Selecionar</button>
+        <div class="hero-container" style="max-width: 1200px;">
+            <div class="brand-container" style="margin-bottom: 20px;">
+                <div class="brand-main" style="font-size: 1.2rem;">Quintes Capital</div>
+                <div class="brand-sub" style="font-size: 0.5rem;">Next Gen Advisory</div>
             </div>
 
-            <!-- Plano Avançado -->
-            <div class="plan-card featured">
-                <div class="featured-tag">Mais Recomendado</div>
-                <div class="plan-name">Plano Avançado</div>
-                <div class="plan-price">R$ 1.290 <span>/único</span></div>
-                <ul class="plan-features">
-                    <li>Relatório PDF Detalhado</li>
-                    <li>Benchmarks Setoriais</li>
-                    <li>Análise de Value Drivers</li>
-                    <li>Dashboard Interativo (30 dias)</li>
-                </ul>
-                <button class="btn-plan">Selecionar</button>
+            <div class="valuation-badge">
+                <p id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.75rem; margin-bottom:15px;">Avaliação Estimada</p>
+                <div class="valuation-value">
+                    <span style="font-size:1.5rem; color:#64748b; margin-right:10px;">R$</span><span id="res-valor">0</span>
+                </div>
+                <p style="color:#64748b; font-size:0.9rem; margin-top:15px;">Metodologia: Múltiplo Setorial <b>6.0x EBITDA</b></p>
             </div>
 
-            <!-- Plano PRO -->
-            <div class="plan-card">
-                <div class="plan-name">Plano PRO</div>
-                <div class="plan-price">R$ 2.490 <span>/único</span></div>
-                <ul class="plan-features">
-                    <li>Dossiê M&A Completo</li>
-                    <li>Análise de Fluxo de Caixa (DCF)</li>
-                    <li>Suporte via WhatsApp</li>
-                    <li>Acesso Vitalício ao Dashboard</li>
-                </ul>
-                <button class="btn-plan">Selecionar</button>
+            <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 40px;">Expanda sua Análise Estratégica</h2>
+
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-name">Básico</div>
+                    <div class="plan-price">R$ 490</div>
+                    <ul class="plan-features">
+                        <li>Relatório PDF Simplificado</li>
+                        <li>Cálculo de Múltiplos Base</li>
+                        <li>Certificado de Estimativa</li>
+                    </ul>
+                    <button class="btn-plan">Selecionar</button>
+                </div>
+
+                <div class="plan-card featured">
+                    <div class="plan-name">Avançado</div>
+                    <div class="plan-price">R$ 1.290</div>
+                    <ul class="plan-features">
+                        <li>Relatório PDF Detalhado</li>
+                        <li>Benchmarks Setoriais</li>
+                        <li>Análise de Value Drivers</li>
+                        <li>Dashboard Interativo</li>
+                    </ul>
+                    <button class="btn-plan">Selecionar</button>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-name">Consultoria</div>
+                    <div class="plan-price">Sob Consulta</div>
+                    <ul class="plan-features">
+                        <li>Dossiê M&A Completo</li>
+                        <li>Análise DCF Premium</li>
+                        <li>Call com Advisor Quintes</li>
+                        <li>Plano de Preparação de Venda</li>
+                    </ul>
+                    <button class="btn-plan">Falar com Especialista</button>
+                </div>
             </div>
-        </div>
 
-        <!-- Especialista -->
-        <div class="specialist-section">
-            <h4 style="font-size: 1.2rem; margin-bottom: 10px;">Precisa de uma análise personalizada?</h4>
-            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 25px;">Agende uma conversa com um advisor da Quintes para uma consultoria de valuation e saída.</p>
-            <button class="btn-premium" style="background: white; color: black !important;">Consulte um Especialista</button>
+            <button onclick="window.location.href=window.location.pathname" style="margin-top:60px; background:none; border:none; color:#475569; cursor:pointer; text-decoration:underline; font-size:0.8rem; letter-spacing:1px; text-transform:uppercase;">Refazer Diagnóstico</button>
         </div>
-
-        <button onclick="window.location.href=window.location.pathname" style="margin-top:50px; background:none; border:none; color:#475569; cursor:pointer; text-decoration:underline;">Refazer Diagnóstico</button>
     </div>
 
     <script>
-        // Lógica de Redirecionamento e Parâmetros
         window.onload = function() {
             const params = new URLSearchParams(window.location.search);
             const ebitda = params.get('ebitda');
             if (ebitda) {
-                mostrarResultado(ebitda, params.get('empresa'));
+                document.getElementById('etapa1').style.display = 'none';
+                document.getElementById('etapa3').classList.add('active');
+                const val = parseFloat(ebitda) * 6;
+                document.getElementById('res-valor').innerText = val.toLocaleString('pt-BR');
+                const emp = params.get('empresa');
+                if(emp) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${emp}`;
             }
         };
 
         function irParaEtapa2() {
             document.getElementById('etapa1').style.display = 'none';
             document.getElementById('iframe-container').style.display = 'block';
-        }
-
-        function mostrarResultado(ebitda, empresa) {
-            document.getElementById('etapa1').style.display = 'none';
-            document.getElementById('iframe-container').style.display = 'none';
-            const etapa3 = document.getElementById('etapa3');
-            etapa3.classList.add('active');
-            
-            const valor = parseFloat(ebitda) * 6;
-            document.getElementById('res-valor').innerText = valor.toLocaleString('pt-BR');
-            if(empresa) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${empresa}`;
         }
     </script>
 </body>
