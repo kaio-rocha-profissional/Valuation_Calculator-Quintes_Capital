@@ -254,3 +254,48 @@ elif st.session_state.etapa == 2:
         <div class="valuation-box">
             <h2 class="valuation-title">Valuation Estimado de {dados['empresa']}</h2>
             <div class="valuation-value">R$ {dados['valuation']:,.2f}</div>
+            <p class="valuation-info">💡 Estimativa estática baseada em múltiplos de mercado Telecom atual.</p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.divider()
+    
+    # Título das Ofertas Customizado
+    st.markdown('<h2 class="plans-title">Como deseja evoluir este resultado?</h2>', unsafe_allow_html=True)
+    
+    # Três Opções Principais
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+            <h3 style="color:#007bff; font-weight:700;">Plano<br>Relatório</h3>
+            <p>PDF Completo com Check-up de Indicadores e Plano de Ação.</p>
+        """, unsafe_allow_html=True)
+        if st.button("Quero Relatório", key="b1"):
+            st.success("Solicitação enviada! Entraremos em contato.")
+
+    with col2:
+        st.markdown("""
+            <h3 style="color:#007bff; font-weight:700;">Plano<br>SaaS</h3>
+            <p>Acompanhamento mensal e acesso ilimitado ao Software.</p>
+        """, unsafe_allow_html=True)
+        if st.button("Quero Plano SaaS", key="b2"):
+            st.success("Setup da sua conta iniciado. Verifique seu e-mail.")
+
+    with col3:
+        st.markdown("""
+            <h3 style="color:#007bff; font-weight:700;">Advisor<br>M&A</h3>
+            <p>Pronto para vender? Mentoria particular de M&A.</p>
+        """, unsafe_allow_html=True)
+        if st.button("Quero Advisor", key="b3"):
+            st.success("Kaio ou um advisorQuint entrará em contato em instantes.")
+
+    # Botão de falar com consultor como rodapé
+    st.markdown('<div class="special-btn">', unsafe_allow_html=True)
+    if st.button("🤝 Falar com um Consultor Quintes"):
+        st.success("Sua solicitação foi enviada para nossa equipa M&A.")
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    if st.button("Refazer Cálculo"):
+        st.session_state.etapa = 1
+        st.rerun()
