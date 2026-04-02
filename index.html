@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valuation Intelligence | Quintes Capital</title>
+    <title>Valuation Intelligence</title>
     <link rel="icon" href="https://quintes.com.br/wp-content/uploads/2023/07/Favicon-Quintes.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -22,32 +22,13 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
         .page { display: none; min-height: 100vh; width: 100vw; animation: fadeIn 1.2s ease-out forwards; }
-        .active { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
-
-        /* --- LOGO EM TEXTO (BOUTIQUE STYLE) --- */
-        .brand-container { text-align: center; margin-bottom: 40px; }
-        .brand-main { 
-            font-weight: 800; 
-            font-size: 2.2rem; 
-            letter-spacing: 6px; 
-            text-transform: uppercase; 
-            line-height: 1;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-        .brand-sub { 
-            font-weight: 400; 
-            font-size: 0.75rem; 
-            letter-spacing: 5px; 
-            text-transform: uppercase; 
-            color: #475569;
-        }
+        .active { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
 
         /* --- LANDING PAGE --- */
-        .hero-container { text-align: center; max-width: 1000px; }
+        .hero-container { text-align: center; max-width: 1000px; padding-top: 0; }
         .hero-title { 
             font-weight: 800; 
-            font-size: clamp(2.2rem, 5vw, 3.8rem); 
+            font-size: clamp(2.2rem, 5vw, 4rem); 
             letter-spacing: -2px; 
             line-height: 1.1; 
             margin-bottom: 25px; 
@@ -59,19 +40,28 @@
         
         .btn-premium {
             background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
-            color: white; border: none; padding: 20px 60px; border-radius: 50px;
+            color: white; border: none; padding: 22px 70px; border-radius: 50px;
             font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
             cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
             text-decoration: none; font-size: 0.9rem;
         }
         .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5); }
 
-        /* --- RESULTADOS E PLANOS (ETAPA 3) --- */
-        .valuation-badge {
-            background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2);
-            padding: 50px 20px; border-radius: 30px; margin-bottom: 60px; width: 100%; max-width: 700px; text-align: center;
+        /* --- INSIGHTS HORIZONTAIS --- */
+        .benefits-grid {
+            display: flex; justify-content: center; gap: 30px; margin-top: 70px;
+            padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); width: 100%;
         }
-        .valuation-value { font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; letter-spacing: -3px; }
+        .benefit-item { flex: 1; max-width: 250px; text-align: left; }
+        .benefit-item h4 { font-size: 0.8rem; color: #3b82f6; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .benefit-item p { font-size: 0.85rem; color: #64748b; line-height: 1.5; }
+
+        /* --- RESULTADOS E PLANOS --- */
+        .valuation-badge {
+            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 20px; border-radius: 30px; margin-bottom: 50px; width: 100%; max-width: 700px; text-align: center;
+        }
+        .valuation-value { font-size: clamp(3.5rem, 9vw, 5.5rem); font-weight: 800; letter-spacing: -3px; }
 
         .plans-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -82,32 +72,33 @@
             border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px;
             padding: 40px; text-align: left; transition: 0.3s; display: flex; flex-direction: column;
         }
-        .plan-card:hover { border-color: #3b82f6; transform: translateY(-5px); background: rgba(255, 255, 255, 0.05); }
+        .plan-card:hover { border-color: #3b82f6; transform: translateY(-10px); }
         .plan-card.featured { border: 2px solid #3b82f6; background: rgba(59, 130, 246, 0.03); }
         
-        .plan-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: #3b82f6; text-transform: uppercase; letter-spacing: 1px; }
-        .plan-price { font-size: 2.2rem; font-weight: 800; margin-bottom: 25px; }
+        .plan-name { font-size: 1rem; font-weight: 700; margin-bottom: 15px; color: #3b82f6; text-transform: uppercase; letter-spacing: 2px; }
+        .plan-price { font-size: 2.5rem; font-weight: 800; margin-bottom: 25px; }
         .plan-features { list-style: none; margin-bottom: 35px; flex-grow: 1; }
-        .plan-features li { font-size: 0.9rem; color: #94a3b8; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .plan-features li { font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .plan-features li::before { content: "→"; color: #3b82f6; }
 
-        .btn-plan { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-plan { width: 100%; padding: 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); background: transparent; color: white; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; }
         .btn-plan:hover { background: #fff; color: #000; }
         .featured .btn-plan { background: #3b82f6; border: none; }
 
-        /* --- FOOTER POWERED BY (TEXT ONLY) --- */
-        .footer-text-brand { margin-top: 100px; text-align: center; opacity: 0.8; }
-        .pwr-by { font-size: 0.6rem; letter-spacing: 3px; color: #475569; text-transform: uppercase; margin-bottom: 15px; }
-        .f-brand-main { font-weight: 700; font-size: 1.4rem; letter-spacing: 8px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
-        .f-brand-sub { font-weight: 400; font-size: 0.55rem; letter-spacing: 6px; text-transform: uppercase; color: #475569; }
+        /* --- FOOTER (APENAS TEXTO) --- */
+        .footer-text-brand { margin-top: 80px; text-align: center; opacity: 0.7; padding-bottom: 40px; }
+        .pwr-by { font-size: 0.6rem; letter-spacing: 4px; color: #475569; text-transform: uppercase; margin-bottom: 15px; }
+        .f-brand-main { font-weight: 700; font-size: 1.2rem; letter-spacing: 10px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
+        .f-brand-sub { font-weight: 400; font-size: 0.5rem; letter-spacing: 8px; text-transform: uppercase; color: #475569; }
 
         /* Iframe */
         #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .f-brand-main { font-size: 1rem; letter-spacing: 4px; }
+        @media (max-width: 850px) {
+            .hero-title { font-size: 2.8rem; }
+            .benefits-grid { flex-direction: column; align-items: center; text-align: center; gap: 40px; }
+            .benefit-item { text-align: center; }
         }
     </style>
 </head>
@@ -116,18 +107,27 @@
     <!-- ETAPA 1: LANDING PAGE -->
     <div id="etapa1" class="page active">
         <div class="hero-container">
-            <!-- MARCA QUINTES (TEXTO) -->
-            <div class="brand-container">
-                <div class="brand-main">Quintes Capital</div>
-                <div class="brand-sub">Next Gen Advisory</div>
+            <h1 class="hero-title">Quanto vale o esforço<br>de uma vida inteira?</h1>
+            <p class="subheadline">Descubra o valor real da sua empresa com inteligência de mercado e metodologia avançada de M&A.</p>
+            
+            <button class="btn-premium" onclick="irParaEtapa2()">Calcular Valuation Agora</button>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <h4>M&A e Venda</h4>
+                    <p>Esteja preparado para negociações de saída ou fusões estratégicas com dados sólidos.</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>Captação</h4>
+                    <p>Apresente indicadores profissionais para atrair novos sócios ou investidores institucionais.</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>Gestão</h4>
+                    <p>Identifique os principais drivers que impulsionam ou destroem o valor da sua operação.</p>
+                </div>
             </div>
 
-            <h1 class="hero-title">Quanto vale o esforço<br>de uma vida inteira?</h1>
-            <p class="subheadline">Descubra o valor real da sua empresa com inteligência de mercado e metodologia de M&A.</p>
-            
-            <button class="btn-premium" onclick="irParaEtapa2()">Calcular Valuation</button>
-            
-            <!-- FOOTER POWERED BY (TEXTO) -->
+            <!-- FOOTER TEXTUAL -->
             <div class="footer-text-brand">
                 <p class="pwr-by">Powered by</p>
                 <div class="f-brand-main">Quintes Capital</div>
@@ -144,20 +144,16 @@
     <!-- ETAPA 3: RESULTADOS E PLANOS -->
     <div id="etapa3" class="page">
         <div class="hero-container" style="max-width: 1200px;">
-            <div class="brand-container" style="margin-bottom: 20px;">
-                <div class="brand-main" style="font-size: 1.2rem;">Quintes Capital</div>
-                <div class="brand-sub" style="font-size: 0.5rem;">Next Gen Advisory</div>
-            </div>
-
+            
             <div class="valuation-badge">
                 <p id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.75rem; margin-bottom:15px;">Avaliação Estimada</p>
                 <div class="valuation-value">
                     <span style="font-size:1.5rem; color:#64748b; margin-right:10px;">R$</span><span id="res-valor">0</span>
                 </div>
-                <p style="color:#64748b; font-size:0.9rem; margin-top:15px;">Metodologia: Múltiplo Setorial <b>6.0x EBITDA</b></p>
+                <p style="color:#64748b; font-size:0.9rem; margin-top:20px; letter-spacing:1px;">Metodologia: Múltiplo Setorial <b>6.0x EBITDA</b></p>
             </div>
 
-            <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 40px;">Expanda sua Análise Estratégica</h2>
+            <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 40px; letter-spacing: -1px;">Expanda sua Análise Estratégica</h2>
 
             <div class="plans-grid">
                 <div class="plan-card">
@@ -189,14 +185,14 @@
                     <ul class="plan-features">
                         <li>Dossiê M&A Completo</li>
                         <li>Análise DCF Premium</li>
-                        <li>Call com Advisor Quintes</li>
+                        <li>Call com Advisor Especialista</li>
                         <li>Plano de Preparação de Venda</li>
                     </ul>
-                    <button class="btn-plan">Falar com Especialista</button>
+                    <button class="btn-plan">Falar com Advisor</button>
                 </div>
             </div>
 
-            <button onclick="window.location.href=window.location.pathname" style="margin-top:60px; background:none; border:none; color:#475569; cursor:pointer; text-decoration:underline; font-size:0.8rem; letter-spacing:1px; text-transform:uppercase;">Refazer Diagnóstico</button>
+            <button onclick="window.location.href=window.location.pathname" style="margin-top:60px; background:none; border:none; color:#475569; cursor:pointer; text-decoration:underline; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;">Refazer Diagnóstico</button>
         </div>
     </div>
 
