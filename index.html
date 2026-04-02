@@ -14,39 +14,46 @@
             background: radial-gradient(circle at top right, #0a192f, #02060c);
             color: #FFFFFF; 
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+            overflow: hidden;
+            background-attachment: fixed;
         }
 
-        /* Animação Suave */
+        /* --- ANIMAÇÕES --- */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); filter: blur(0); }
+            to { opacity: 0; transform: scale(0.95); filter: blur(10px); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- ESTRUTURA --- */
         .page { 
             display: none; 
             min-height: 100vh; 
             width: 100vw;
-            animation: fadeIn 1.2s ease-out forwards; 
+            transition: all 0.8s ease-in-out;
         }
 
-        .active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .active { display: flex; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 1.5s ease-out forwards; }
+        
+        /* Classe de saída para a Landing Page */
+        .exit-animation { animation: fadeOut 0.8s ease-in forwards !important; }
 
-        /* Landing Page - Layout Central */
-        .hero-container { 
-            text-align: center; 
-            max-width: 1100px; 
-            padding: 40px 20px;
-        }
-
+        /* --- LANDING PAGE --- */
+        .hero-container { text-align: center; max-width: 1100px; padding: 20px; }
         .logo-main { width: 200px; margin-bottom: 30px; }
-
         .hero-title {
             font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: -2px; line-height: 1.1;
             margin-bottom: 20px; background: linear-gradient(to right, #ffffff, #94a3b8);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
         .subheadline { font-size: 1.15rem; color: #a8b2d1; margin-bottom: 40px; font-weight: 300; max-width: 600px; margin-left: auto; margin-right: auto; }
 
         /* Botão Premium */
@@ -60,58 +67,43 @@
         }
         .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5); }
 
-        /* SEÇÃO DE INSIGHTS (HORIZONTAL) */
+        /* Insights Horizontais */
         .benefits-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
+            display: flex; justify-content: center; gap: 30px; margin-top: 60px;
+            padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); width: 100%;
         }
-        .benefit-item {
-            flex: 1;
-            max-width: 220px;
-            text-align: left;
-        }
-        .benefit-item h4 {
-            font-size: 0.85rem;
-            color: #3b82f6;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .benefit-item p {
-            font-size: 0.85rem;
-            color: #64748b;
-            line-height: 1.4;
-        }
+        .benefit-item { flex: 1; max-width: 220px; text-align: left; }
+        .benefit-item h4 { font-size: 0.8rem; color: #3b82f6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .benefit-item p { font-size: 0.8rem; color: #64748b; line-height: 1.4; }
 
-        /* Rodapé Powered By */
-        .footer-powered { margin-top: 60px; opacity: 0.6; text-align: center; }
-        .powered-text { font-size: 0.6rem; letter-spacing: 2px; color: #475569; text-transform: uppercase; }
-        .footer-logo { width: 160px; filter: brightness(0) invert(1); margin-top: 8px; }
+        /* --- LOADING OVERLAY --- */
+        #loading-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #02060c; display: none; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 10000;
+        }
+        .spinner { width: 40px; height: 40px; border: 3px solid rgba(59, 130, 246, 0.2); border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
 
-        /* Iframe */
-        #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; }
+        /* --- IFRAME CONTAINER --- */
+        #iframe-container { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #000; z-index: 9999; display: none; opacity: 0;
+            transition: opacity 1s ease-in;
+        }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* Etapa de Resultado */
-        .res-card {
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px;
-            padding: 50px 30px; margin: 30px 0; width: 100%; max-width: 600px;
-        }
-        .res-value { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 800; letter-spacing: -2px; }
+        .footer-powered { margin-top: 60px; opacity: 0.5; text-align: center; }
+        .footer-logo { width: 150px; filter: brightness(0) invert(1); margin-top: 8px; }
+
+        /* Resultado */
+        .res-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; padding: 50px; margin: 30px 0; width: 100%; max-width: 600px; text-align: center;}
+        .res-value { font-size: 4.5rem; font-weight: 800; letter-spacing: -2px; }
 
         @media (max-width: 850px) {
-            .benefits-grid { flex-direction: column; align-items: center; gap: 20px; }
-            .benefit-item { text-align: center; max-width: 100%; }
+            .benefits-grid { flex-direction: column; align-items: center; text-align: center; }
+            .benefit-item { text-align: center; }
             .benefit-item h4 { justify-content: center; }
+            body { overflow-y: auto; }
         }
     </style>
 </head>
@@ -128,27 +120,32 @@
             
             <button class="btn-premium" onclick="irParaEtapa2()">CALCULAR VALUATION</button>
 
-            <!-- NOVA SEÇÃO: POR QUE FAZER O SEU VALUATION? -->
             <div class="benefits-grid">
                 <div class="benefit-item">
-                    <h4><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/><path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg> M&A e Venda</h4>
+                    <h4>M&A e Venda</h4>
                     <p>Esteja preparado para negociações de saída ou fusões estratégicas.</p>
                 </div>
                 <div class="benefit-item">
-                    <h4><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM5 5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5zm-4 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9z"/></svg> Captação</h4>
+                    <h4>Captação</h4>
                     <p>Apresente indicadores sólidos para atrair novos sócios ou investidores.</p>
                 </div>
                 <div class="benefit-item">
-                    <h4><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/></svg> Gestão</h4>
+                    <h4>Gestão</h4>
                     <p>Identifique os pontos críticos que destroem o valor da sua empresa.</p>
                 </div>
             </div>
 
             <div class="footer-powered">
-                <p class="powered-text">Powered by</p>
+                <p style="font-size: 0.6rem; letter-spacing: 2px; color: #475569; text-transform: uppercase;">Powered by</p>
                 <img src="https://i.imgur.com/8N4U9M6.png" class="footer-logo">
             </div>
         </div>
+    </div>
+
+    <!-- OVERLAY DE CARREGAMENTO -->
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p style="letter-spacing: 2px; font-size: 0.7rem; color: #3b82f6; text-transform: uppercase;">Iniciando ambiente seguro...</p>
     </div>
 
     <!-- ETAPA 2: IFRAME FULLSCREEN -->
@@ -172,7 +169,7 @@
     </div>
 
     <script>
-        // Lógica de Redirecionamento
+        // Detecção de Resultado na URL
         window.onload = function() {
             const params = new URLSearchParams(window.location.search);
             const ebitda = params.get('ebitda');
@@ -187,8 +184,30 @@
         };
 
         function irParaEtapa2() {
-            document.getElementById('etapa1').style.display = 'none';
-            document.getElementById('iframe-container').style.display = 'block';
+            const etapa1 = document.getElementById('etapa1');
+            const loading = document.getElementById('loading-overlay');
+            const iframeCont = document.getElementById('iframe-container');
+
+            // 1. Inicia animação de saída da Landing Page
+            etapa1.classList.add('exit-animation');
+
+            setTimeout(() => {
+                // 2. Esconde Landing e mostra Loading suave
+                etapa1.style.display = 'none';
+                loading.style.display = 'flex';
+                loading.style.animation = 'fadeIn 0.5s ease-out';
+
+                // 3. Simula o tempo de carregamento do Iframe (1.2 segundos)
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                    iframeCont.style.display = 'block';
+                    // 4. Fade-In suave do Iframe
+                    setTimeout(() => {
+                        iframeCont.style.opacity = '1';
+                    }, 50);
+                }, 1200);
+
+            }, 750); // Tempo exato da animação de saída
         }
     </script>
 </body>
