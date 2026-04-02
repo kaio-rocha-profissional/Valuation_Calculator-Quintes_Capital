@@ -1,1 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valuation Intelligence | Quintes Capital</title>
+    <link rel="icon" href="https://quintes.com.br/wp-content/uploads/2023/07/Favicon-Quintes.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        body { 
+            background: radial-gradient(circle at top right, #0a192f, #02060c);
+            color: #FFFFFF; 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Estilo das Seções */
+        .page { display: none; min-height: 100vh; animation: fadeIn 1.2s ease-out; }
+        .active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-container { text-align: center; max-width: 900px; padding: 20px; }
+        .hero-title {
+            font-weight: 800; font-size: 3.8rem; letter-spacing: -2px; line-height: 1.1;
+            margin-bottom: 20px; background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* Botão Premium */
+        .btn-premium {
+            background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
+            color: white; border: none; padding: 18px 50px; border-radius: 50px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; transition: all 0.3s ease; 
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+            text-decoration: none; display: inline-block;
+        }
+        .btn-premium:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4); }
+
+        /* Rodapé Powered By */
+        .footer-powered { margin-top: 60px; opacity: 0.7; text-align: center; }
+        .powered-text { font-size: 0.7rem; letter-spacing: 2px; color: #475569; text-transform: uppercase; }
+        .footer-logo { width: 180px; filter: brightness(0) invert(1); margin-top: 10px; }
+
+        /* Iframe */
+        #iframe-fillout { position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 9999; display: none; }
+
+        /* Card de Resultado */
+        .res-card {
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px;
+            padding: 60px 40px; margin: 40px 0; text-align: center;
+        }
+        .grid-passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; max-width: 900px; }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .grid-passos { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ETAPA 1: LANDING PAGE -->
+    <div id="etapa1" class="page active">
+        <div class="hero-container">
+            <img src="https://quintes.com.br/wp-content/uploads/2023/07/Logo-Branca-Simbolo-Preto-Texto.png" width="220" alt="Logo">
+            <p style="color:#3b82f6; font-weight:700; letter-spacing:3px; margin-top:40px; font-size:0.8rem; text-transform:uppercase;">Estratégia & Inteligência</p>
+            <h1 class="hero-title">Quanto vale o esforço<br>de uma vida inteira?</h1>
+            <p style="font-size:1.3rem; color:#a8b2d1; margin-bottom:45px; font-weight:300;">Calcule o valor de mercado real da sua operação em minutos com nossa metodologia de M&A.</p>
+            <button class="btn-premium" onclick="irParaEtapa2()">CALCULAR VALUATION</button>
+            <div class="footer-powered">
+                <p class="powered-text">Powered by</p>
+                <img src="https://i.imgur.com/8N4U9M6.png" class="footer-logo">
+            </div>
+        </div>
+    </div>
+
+    <!-- ETAPA 2: FORMULÁRIO -->
+    <iframe id="iframe-fillout" src="https://forms.fillout.com/t/1qwGDDvuKKus" allow="camera; microphone; geolocation"></iframe>
+
+    <!-- ETAPA 3: RESULTADO -->
+    <div id="etapa3" class="page">
+        <div class="hero-container">
+            <img src="https://quintes.com.br/wp-content/uploads/2023/07/Logo-Branca-Simbolo-Preto-Texto.png" width="140" alt="Logo">
+            <div class="res-card">
+                <div id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.85rem; margin-bottom:15px;">Avaliação Estimada</div>
+                <div style="font-size: 4.8rem; font-weight: 800; letter-spacing: -2px;">
+                    <span style="font-size:1.8rem; color:#64748b; margin-right:10px;">R$</span><span id="res-valor">0</span>
+                </div>
+                <p style="color:#64748b; margin-top:20px; font-size:1.1rem;">Baseado em Múltiplo Setorial de <b>6.0x EBITDA</b></p>
+            </div>
+            <h2 style="font-size:1.8rem; font-weight:700; margin-bottom:40px;">Próximos Passos</h2>
+            <div class="grid-passos">
+                <button class="btn-premium">BAIXAR RELATÓRIO</button>
+                <button class="btn-premium">VER DASHBOARD</button>
+                <button class="btn-premium">FALAR COM ADVISOR</button>
+            </div>
+            <button onclick="location.href='/'" style="margin-top:40px; background:none; border:none; color:#64748b; cursor:pointer; text-decoration:underline;">REFAZER DIAGNÓSTICO</button>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de navegação
+        const urlParams = new URLSearchParams(window.location.search);
+        const ebitda = urlParams.get('ebitda');
+        const empresa = urlParams.get('empresa');
+
+        if (ebitda) {
+            document.getElementById('etapa1').classList.remove('active');
+            document.getElementById('etapa3').classList.add('active');
+            
+            const valuation = parseFloat(ebitda) * 6;
+            document.getElementById('res-valor').innerText = valuation.toLocaleString('pt-BR');
+            document.getElementById('res-empresa').innerText = `Avaliação Estimada • ${empresa || 'Sua Empresa'}`;
+        }
+
+        function irParaEtapa2() {
+            document.getElementById('etapa1').style.display = 'none';
+            document.getElementById('iframe-fillout').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
