@@ -8,233 +8,133 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
-        /* Reset Total para remover bordas e gaps laterais */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html, body {
-            width: 100%;
-            overflow-x: hidden; /* Elimina qualquer borda ou scroll horizontal */
-            background: #02060c;
-            color: #FFFFFF; 
-            font-family: 'Inter', sans-serif;
+        /* RESET TOTAL PARA ELIMINAR BORDAS E SCROLL HORIZONTAL */
+        html, body { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            overflow: hidden; /* Trava o scroll total na landing */
+            background: #02060c; color: #FFFFFF; font-family: 'Inter', sans-serif;
         }
+
+        * { box-sizing: border-box; }
 
         /* --- ANIMAÇÕES --- */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .page { display: none; width: 100%; min-height: 100vh; animation: fadeIn 1.2s ease-out forwards; }
-        .active { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+        .page { display: none; width: 100%; height: 100vh; animation: fadeIn 1s ease-out forwards; }
+        .active { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
 
-        /* --- PADRÃO DE TÍTULOS (Sincronizado) --- */
+        /* --- PADRÃO DE TÍTULOS --- */
         .title-style {
-            font-weight: 800; 
-            font-size: clamp(2.2rem, 5.5vw, 3.8rem); 
-            letter-spacing: -2px; 
-            line-height: 1.05; 
+            font-weight: 800; font-size: clamp(1.8rem, 4vw, 3rem); 
+            letter-spacing: -2px; line-height: 1.1; margin-bottom: 15px;
             background: linear-gradient(to right, #ffffff, #94a3b8); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
         }
 
-        /* --- SESSÃO 1: HERO --- */
-        .hero-section {
-            padding: 100px 20px 140px 20px;
-            text-align: center;
-            max-width: 1000px;
-            width: 100%;
-            background: radial-gradient(circle at top right, #0a192f, #02060c);
-        }
-        
-        .subheadline { 
-            font-size: 1.3rem; color: #a8b2d1; margin: 25px auto 50px auto; 
-            font-weight: 300; max-width: 750px; line-height: 1.5;
-        }
+        /* --- SESSÃO 1: HERO (COMPACTA) --- */
+        .hero-container { text-align: center; max-width: 900px; width: 100%; margin-bottom: 30px; }
+        .subheadline { font-size: 1.1rem; color: #a8b2d1; margin-bottom: 30px; font-weight: 300; line-height: 1.4; }
         
         .btn-premium {
             background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
-            color: white; border: none; padding: 26px 90px; border-radius: 60px;
-            font-weight: 800; text-transform: uppercase; letter-spacing: 3px;
-            cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3); text-decoration: none; font-size: 1.1rem;
-            margin-bottom: 60px;
+            color: white; border: none; padding: 20px 60px; border-radius: 50px;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            text-decoration: none; font-size: 1rem;
         }
-        .btn-premium:hover { transform: scale(1.05); box-shadow: 0 20px 50px rgba(59, 130, 246, 0.5); }
+        .btn-premium:hover { transform: scale(1.03); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5); }
 
-        /* --- SESSÃO 2: COMO FUNCIONA --- */
-        .how-it-works-section {
-            background: rgba(255, 255, 255, 0.02);
-            width: 100%;
-            padding: 120px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .section-main-title {
-            margin-bottom: 80px;
-            text-align: center;
-            display: inline-block;
-        }
-        
+        /* --- SESSÃO 2: COMO FUNCIONA (HORIZONTAL PARA ECONOMIZAR ESPAÇO) --- */
         .how-it-works-container {
-            max-width: 800px;
-            width: 100%;
-            text-align: left;
-            position: relative;
-        }
-
-        .step-item {
-            display: flex;
-            gap: 35px;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        /* Linha conectora vertical */
-        .step-item:not(:last-child)::after {
-            content: "";
-            position: absolute;
-            left: 24px;
-            top: 60px;
-            width: 1px;
-            height: calc(100% - 20px);
-            background: linear-gradient(to bottom, #3b82f6 0%, transparent 100%);
-        }
-
-        .step-number {
-            min-width: 50px;
-            height: 50px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 2px solid #3b82f6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.1rem;
-            color: #3b82f6;
-            z-index: 2;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-        }
-
-        .step-content h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; color: #fff; }
-        .step-content p { font-size: 1rem; color: #a8b2d1; line-height: 1.6; font-weight: 300; }
-
-        /* --- SESSÃO 3: BENEFÍCIOS / FOOTER --- */
-        .benefits-footer-section {
-            padding: 100px 20px;
-            max-width: 1100px;
-            width: 100%;
+            width: 100%; max-width: 1100px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px; padding: 30px; margin-bottom: 30px;
             text-align: center;
         }
-
-        .benefits-grid {
-            display: flex; justify-content: center; gap: 40px; margin-bottom: 100px;
+        .section-label { 
+            font-weight: 800; font-size: 1.2rem; letter-spacing: 4px; color: #3b82f6; 
+            text-transform: uppercase; margin-bottom: 25px; 
         }
-        .benefit-item { flex: 1; text-align: left; }
-        .benefit-item h4 { font-size: 0.9rem; color: #3b82f6; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; font-weight: 700; }
-        .benefit-item p { font-size: 0.95rem; color: #64748b; line-height: 1.5; }
 
-        /* Powered By Texto */
-        .footer-text-brand { opacity: 0.6; }
-        .pwr-by { font-size: 0.6rem; letter-spacing: 5px; color: #475569; text-transform: uppercase; margin-bottom: 15px; }
-        .f-brand-main { font-weight: 700; font-size: 1.4rem; letter-spacing: 12px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
-        .f-brand-sub { font-weight: 400; font-size: 0.6rem; letter-spacing: 8px; text-transform: uppercase; color: #475569; }
+        .steps-wrapper { display: flex; gap: 20px; justify-content: space-between; }
+        .step-item { flex: 1; text-align: left; position: relative; }
+        .step-number {
+            width: 32px; height: 32px; background: #3b82f6; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.8rem; margin-bottom: 12px;
+        }
+        .step-item h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+        .step-item p { font-size: 0.8rem; color: #64748b; line-height: 1.4; }
 
-        /* --- OUTROS ELEMENTOS (Iframe e Resultados) --- */
+        /* --- FOOTER COMPACTO --- */
+        .footer-text-brand { text-align: center; opacity: 0.6; }
+        .pwr-by { font-size: 0.5rem; letter-spacing: 4px; color: #475569; text-transform: uppercase; margin-bottom: 8px; }
+        .f-brand-main { font-weight: 700; font-size: 1rem; letter-spacing: 8px; text-transform: uppercase; color: #fff; }
+
+        /* --- IFRAME (TELA CHEIA) --- */
         #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        #etapa3.active { padding-top: 80px; padding-bottom: 100px; width: 100%; }
+        /* --- ETAPA 3: RESULTADOS (AQUI O SCROLL É PERMITIDO) --- */
+        #etapa3.active { overflow-y: auto; justify-content: flex-start; padding-top: 50px; }
         .valuation-badge {
             background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 60px 20px; border-radius: 40px; margin: 0 auto 60px auto; width: 100%; max-width: 800px; text-align: center;
+            padding: 40px; border-radius: 30px; margin-bottom: 40px; width: 100%; max-width: 700px; text-align: center;
         }
-        .valuation-value { font-size: clamp(3.5rem, 9vw, 5.5rem); font-weight: 800; letter-spacing: -3px; }
+        .valuation-value { font-size: clamp(3rem, 8vw, 4.5rem); font-weight: 800; letter-spacing: -2px; }
 
+        /* Ajustes Responsivos */
         @media (max-width: 850px) {
-            .hero-section { padding-top: 60px; padding-bottom: 80px; }
-            .subheadline { font-size: 1.15rem; }
-            .benefits-grid { flex-direction: column; align-items: center; text-align: center; gap: 50px; }
-            .section-main-title { margin-bottom: 50px; width: 100%; }
-            .step-item { gap: 20px; }
-            .btn-premium { padding: 22px 50px; font-size: 1rem; width: 90%; }
+            html, body { overflow-y: auto; } /* No mobile o scroll é inevitável */
+            .page { height: auto; padding: 40px 20px; }
+            .steps-wrapper { flex-direction: column; gap: 30px; }
+            .step-item { text-align: center; }
+            .step-number { margin: 0 auto 10px auto; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ETAPA 1: LANDING PAGE -->
+    <!-- ETAPA 1: LANDING PAGE (SISTEMA DE TELA ÚNICA) -->
     <div id="etapa1" class="page active">
         
-        <!-- SESSÃO 1: HERO -->
-        <section class="hero-section">
+        <div class="hero-container">
             <h1 class="title-style">O valor real do seu negócio<br>revelado com precisão.</h1>
-            <p class="subheadline">Metodologia avançada de M&A para empresários que buscam clareza estratégica e maximização de resultados.</p>
+            <p class="subheadline">Metodologia de M&A para empresários que buscam clareza estratégica.</p>
             <button class="btn-premium" onclick="irParaEtapa2()">Calcular Valuation Agora</button>
-        </section>
+        </div>
 
-        <!-- SESSÃO 2: COMO FUNCIONA -->
-        <section class="how-it-works-section">
-            <h2 class="title-style section-main-title">COMO FUNCIONA</h2>
-            
-            <div class="how-it-works-container">
+        <div class="how-it-works-container">
+            <p class="section-label">Como Funciona</p>
+            <div class="steps-wrapper">
                 <div class="step-item">
                     <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3>Diagnóstico de Performance</h3>
-                        <p>Você insere os indicadores chave da sua recorrência (assinantes, receita e ticket médio). Dados tratados com sigilo absoluto.</p>
-                    </div>
+                    <h3>Diagnóstico</h3>
+                    <p>Insira os indicadores chave da sua operação recorrente.</p>
                 </div>
                 <div class="step-item">
                     <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3>Inteligência de M&A</h3>
-                        <p>Nossa tecnologia aplica múltiplos setoriais baseados em transações reais de tecnologia e serviços recorrentes no Brasil.</p>
-                    </div>
+                    <h3>Inteligência</h3>
+                    <p>Aplicamos múltiplos setoriais de transações reais.</p>
                 </div>
                 <div class="step-item">
                     <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3>Entrega do Valor</h3>
-                        <p>Para garantir a segurança, enviamos o acesso exclusivo ao seu valuation detalhado diretamente para o seu e-mail corporativo.</p>
-                    </div>
+                    <h3>Segurança</h3>
+                    <p>Você recebe o link do seu valuation direto no e-mail.</p>
                 </div>
                 <div class="step-item">
                     <div class="step-number">04</div>
-                    <div class="step-content">
-                        <h3>Visão Estratégica</h3>
-                        <p>Ao acessar o link, você visualiza seu valor de mercado e pode escolher o plano de suporte ou consultoria para seu próximo passo.</p>
-                    </div>
+                    <h3>Estratégia</h3>
+                    <p>Visualize seu valor e escolha o suporte ideal para o próximo passo.</p>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- SESSÃO 3: BENEFÍCIOS E FOOTER -->
-        <section class="benefits-footer-section">
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <h4>M&A e Venda</h4>
-                    <p>Fundamente negociações de saída estratégica com dados precisos e atuais.</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Captação</h4>
-                    <p>Atraia investidores e sócios apresentando indicadores profissionais de mercado.</p>
-                </div>
-                <div class="benefit-item">
-                    <h4>Gestão de Valor</h4>
-                    <p>Identifique os drivers que mais multiplicam o valor da sua operação hoje.</p>
-                </div>
-            </div>
-
-            <div class="footer-text-brand">
-                <p class="pwr-by">Powered by</p>
-                <div class="f-brand-main">Quintes Capital</div>
-                <div class="f-brand-sub">Next Gen Advisory</div>
-            </div>
-        </section>
+        <div class="footer-text-brand">
+            <p class="pwr-by">Powered by</p>
+            <div class="f-brand-main">Quintes Capital</div>
+        </div>
     </div>
 
     <!-- ETAPA 2: FORMULÁRIO -->
@@ -242,39 +142,32 @@
         <iframe id="fillout-frame" src="https://forms.fillout.com/t/1qwGDDvuKKus"></iframe>
     </div>
 
-    <!-- ETAPA 3: RESULTADOS (TELA DE VENDAS) -->
+    <!-- ETAPA 3: RESULTADOS -->
     <div id="etapa3" class="page">
-        <div class="hero-container" style="max-width: 1200px; padding: 20px;">
+        <div class="hero-container" style="max-width: 1200px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
             <div class="valuation-badge">
-                <p id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Avaliação Estimada</p>
-                <div style="color: #64748b; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px;" id="stats-text">Análise de Performance Recorrente</div>
+                <p id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.7rem; margin-bottom:15px;">Avaliação Estimada</p>
                 <div class="valuation-value">
-                    <span style="font-size:1.8rem; color:#64748b; margin-right:10px;">R$</span><span id="res-valor">0</span>
+                    <span style="font-size:1.5rem; color:#64748b; margin-right:10px;">R$</span><span id="res-valor">0</span>
                 </div>
-                <p style="color:#64748b; font-size:1rem; margin-top:20px;">Multiplicador Sugerido: <b>6.0x Receita Anual</b></p>
+                <p style="color:#64748b; font-size:0.9rem; margin-top:15px;">Múltiplo Sugerido: <b>6.0x Receita Anual</b></p>
             </div>
 
-            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 50px;">Potencialize sua Decisão</h2>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%; max-width: 1100px;">
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:40px; text-align:left;">
-                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Básico</p>
-                    <p style="font-size:2.2rem; font-weight:800; margin-bottom:25px;">R$ 490</p>
-                    <button style="width:100%; padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:white; font-weight:700; cursor:pointer;">Selecionar</button>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 1100px;">
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:30px; text-align:left;">
+                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.7rem; margin-bottom:10px;">Básico</p>
+                    <p style="font-size:1.8rem; font-weight:800;">R$ 490</p>
                 </div>
-                <div style="background:rgba(59,130,246,0.05); border:2px solid #3b82f6; border-radius:24px; padding:40px; text-align:left;">
-                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Avançado</p>
-                    <p style="font-size:2.2rem; font-weight:800; margin-bottom:25px;">R$ 1.290</p>
-                    <button style="width:100%; padding:18px; border-radius:12px; background:#3b82f6; color:white; border:none; font-weight:700; cursor:pointer;">Selecionar</button>
+                <div style="background:rgba(59,130,246,0.05); border:2px solid #3b82f6; border-radius:20px; padding:30px; text-align:left;">
+                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.7rem; margin-bottom:10px;">Avançado</p>
+                    <p style="font-size:1.8rem; font-weight:800;">R$ 1.290</p>
                 </div>
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:40px; text-align:left;">
-                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Consultoria</p>
-                    <p style="font-size:2.2rem; font-weight:800; margin-bottom:25px;">Sob Consulta</p>
-                    <button style="width:100%; padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:white; font-weight:700; cursor:pointer;">Falar com Advisor</button>
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:30px; text-align:left;">
+                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.7rem; margin-bottom:10px;">Consultoria</p>
+                    <p style="font-size:1.8rem; font-weight:800;">Sob Consulta</p>
                 </div>
             </div>
-
-            <button onclick="window.location.href=window.location.pathname" style="margin-top:80px; background:none; border:none; color:#475569; cursor:pointer; text-decoration:underline; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;">Refazer Diagnóstico</button>
+            <button onclick="window.location.href=window.location.pathname" style="margin-top:40px; background:none; border:none; color:#475569; cursor:pointer; text-decoration:underline; font-size:0.7rem; text-transform:uppercase; letter-spacing:2px;">Refazer Diagnóstico</button>
         </div>
     </div>
 
@@ -282,33 +175,21 @@
         function processarValuation() {
             const params = new URLSearchParams(window.location.search);
             const receitaRaw = params.get('receita');
-            const empresa = params.get('empresa');
-            const assinantes = params.get('assinantes');
-
             if (receitaRaw) {
                 document.getElementById('etapa1').style.display = 'none';
-                document.getElementById('iframe-container').style.display = 'none';
                 const etapa3 = document.getElementById('etapa3');
                 etapa3.classList.add('active');
-
-                const receitaLimpa = receitaRaw.replace(/[^\d.,]/g, '').replace(',', '.');
-                const receitaNum = parseFloat(receitaLimpa);
-                
-                if (!isNaN(receitaNum)) {
-                    const valTotal = (receitaNum * 12) * 6;
-                    document.getElementById('res-valor').innerText = valTotal.toLocaleString('pt-BR', {maximumFractionDigits: 0});
-                    if(empresa) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${empresa}`;
-                    if(assinantes) document.getElementById('stats-text').innerText = `${assinantes} Assinantes • R$ ${receitaNum.toLocaleString('pt-BR')}/mês`;
-                }
+                const receitaNum = parseFloat(receitaRaw.replace(/[^\d.,]/g, '').replace(',', '.'));
+                const valTotal = (receitaNum * 12) * 6;
+                document.getElementById('res-valor').innerText = valTotal.toLocaleString('pt-BR', {maximumFractionDigits: 0});
+                const emp = params.get('empresa');
+                if(emp) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${emp}`;
             }
         }
-
         window.onload = processarValuation;
-
         function irParaEtapa2() {
             document.getElementById('etapa1').style.display = 'none';
             document.getElementById('iframe-container').style.display = 'block';
-            window.scrollTo(0,0);
         }
     </script>
 </body>
