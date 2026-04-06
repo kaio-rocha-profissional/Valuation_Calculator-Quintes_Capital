@@ -8,46 +8,46 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
+        /* Reset Total para remover bordas e gaps laterais */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body { 
-            background: #02060c; /* Fundo base sólido para controle de sessões */
+        
+        html, body {
+            width: 100%;
+            overflow-x: hidden; /* Elimina qualquer borda ou scroll horizontal */
+            background: #02060c;
             color: #FFFFFF; 
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
         }
 
         /* --- ANIMAÇÕES --- */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        .page { display: none; min-height: 100vh; width: 100vw; animation: fadeIn 1.2s ease-out forwards; }
-        
-        .active { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: flex-start;
+        .page { display: none; width: 100%; min-height: 100vh; animation: fadeIn 1.2s ease-out forwards; }
+        .active { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+
+        /* --- PADRÃO DE TÍTULOS (Sincronizado) --- */
+        .title-style {
+            font-weight: 800; 
+            font-size: clamp(2.2rem, 5.5vw, 3.8rem); 
+            letter-spacing: -2px; 
+            line-height: 1.05; 
+            background: linear-gradient(to right, #ffffff, #94a3b8); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
         }
 
         /* --- SESSÃO 1: HERO --- */
         .hero-section {
-            padding: 100px 20px 140px 20px; /* Aumentado padding inferior */
+            padding: 100px 20px 140px 20px;
             text-align: center;
             max-width: 1000px;
             width: 100%;
             background: radial-gradient(circle at top right, #0a192f, #02060c);
         }
         
-        .hero-title { 
-            font-weight: 800; font-size: clamp(2.5rem, 6vw, 4.2rem); 
-            letter-spacing: -2px; line-height: 1.05; margin-bottom: 25px; 
-            background: linear-gradient(to right, #ffffff, #94a3b8); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-        }
-        
         .subheadline { 
-            font-size: 1.3rem; color: #a8b2d1; margin-bottom: 50px; 
-            font-weight: 300; max-width: 750px; margin-left: auto; margin-right: auto; line-height: 1.5;
+            font-size: 1.3rem; color: #a8b2d1; margin: 25px auto 50px auto; 
+            font-weight: 300; max-width: 750px; line-height: 1.5;
         }
         
         .btn-premium {
@@ -56,7 +56,7 @@
             font-weight: 800; text-transform: uppercase; letter-spacing: 3px;
             cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3); text-decoration: none; font-size: 1.1rem;
-            margin-bottom: 60px; /* Espaço após o botão */
+            margin-bottom: 60px;
         }
         .btn-premium:hover { transform: scale(1.05); box-shadow: 0 20px 50px rgba(59, 130, 246, 0.5); }
 
@@ -72,17 +72,10 @@
             align-items: center;
         }
 
-        .section-main-title { 
-            font-size: clamp(2rem, 4vw, 2.8rem); 
-            font-weight: 800; 
-            color: #fff; 
-            text-transform: uppercase; 
-            letter-spacing: 6px; 
-            margin-bottom: 80px; 
+        .section-main-title {
+            margin-bottom: 80px;
             text-align: center;
-            background: linear-gradient(to bottom, #ffffff, #64748b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
         
         .how-it-works-container {
@@ -99,7 +92,7 @@
             position: relative;
         }
 
-        /* Linha conectora vertical mais elegante */
+        /* Linha conectora vertical */
         .step-item:not(:last-child)::after {
             content: "";
             position: absolute;
@@ -154,19 +147,20 @@
         #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        #etapa3.active { padding-top: 80px; padding-bottom: 100px; }
+        #etapa3.active { padding-top: 80px; padding-bottom: 100px; width: 100%; }
         .valuation-badge {
             background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 60px 20px; border-radius: 40px; margin-bottom: 60px; width: 100%; max-width: 800px; text-align: center;
+            padding: 60px 20px; border-radius: 40px; margin: 0 auto 60px auto; width: 100%; max-width: 800px; text-align: center;
         }
         .valuation-value { font-size: clamp(3.5rem, 9vw, 5.5rem); font-weight: 800; letter-spacing: -3px; }
 
         @media (max-width: 850px) {
-            .hero-section { padding-top: 60px; }
-            .hero-title { font-size: 2.5rem; }
+            .hero-section { padding-top: 60px; padding-bottom: 80px; }
+            .subheadline { font-size: 1.15rem; }
             .benefits-grid { flex-direction: column; align-items: center; text-align: center; gap: 50px; }
-            .section-main-title { font-size: 1.8rem; letter-spacing: 3px; }
+            .section-main-title { margin-bottom: 50px; width: 100%; }
             .step-item { gap: 20px; }
+            .btn-premium { padding: 22px 50px; font-size: 1rem; width: 90%; }
         }
     </style>
 </head>
@@ -177,14 +171,14 @@
         
         <!-- SESSÃO 1: HERO -->
         <section class="hero-section">
-            <h1 class="hero-title">O valor real do seu negócio<br>revelado com precisão.</h1>
+            <h1 class="title-style">O valor real do seu negócio<br>revelado com precisão.</h1>
             <p class="subheadline">Metodologia avançada de M&A para empresários que buscam clareza estratégica e maximização de resultados.</p>
             <button class="btn-premium" onclick="irParaEtapa2()">Calcular Valuation Agora</button>
         </section>
 
         <!-- SESSÃO 2: COMO FUNCIONA -->
         <section class="how-it-works-section">
-            <h2 class="section-main-title">COMO FUNCIONA</h2>
+            <h2 class="title-style section-main-title">COMO FUNCIONA</h2>
             
             <div class="how-it-works-container">
                 <div class="step-item">
@@ -223,7 +217,7 @@
             <div class="benefits-grid">
                 <div class="benefit-item">
                     <h4>M&A e Venda</h4>
-                    <p>Fundamente negociações e estratégias com dados precisos e atuais.</p>
+                    <p>Fundamente negociações de saída estratégica com dados precisos e atuais.</p>
                 </div>
                 <div class="benefit-item">
                     <h4>Captação</h4>
@@ -250,7 +244,7 @@
 
     <!-- ETAPA 3: RESULTADOS (TELA DE VENDAS) -->
     <div id="etapa3" class="page">
-        <div class="active" style="max-width: 1200px; width: 100%;">
+        <div class="hero-container" style="max-width: 1200px; padding: 20px;">
             <div class="valuation-badge">
                 <p id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Avaliação Estimada</p>
                 <div style="color: #64748b; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px;" id="stats-text">Análise de Performance Recorrente</div>
@@ -263,14 +257,13 @@
             <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 50px;">Potencialize sua Decisão</h2>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%; max-width: 1100px;">
-                <!-- Cards de planos simplificados para o código não ficar infinito -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:40px; text-align:left;">
-                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Básico</p>
+                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Básico</p>
                     <p style="font-size:2.2rem; font-weight:800; margin-bottom:25px;">R$ 490</p>
                     <button style="width:100%; padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:white; font-weight:700; cursor:pointer;">Selecionar</button>
                 </div>
                 <div style="background:rgba(59,130,246,0.05); border:2px solid #3b82f6; border-radius:24px; padding:40px; text-align:left;">
-                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Avançado</p>
+                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Avançado</p>
                     <p style="font-size:2.2rem; font-weight:800; margin-bottom:25px;">R$ 1.290</p>
                     <button style="width:100%; padding:18px; border-radius:12px; background:#3b82f6; color:white; border:none; font-weight:700; cursor:pointer;">Selecionar</button>
                 </div>
@@ -304,7 +297,6 @@
                 if (!isNaN(receitaNum)) {
                     const valTotal = (receitaNum * 12) * 6;
                     document.getElementById('res-valor').innerText = valTotal.toLocaleString('pt-BR', {maximumFractionDigits: 0});
-                    
                     if(empresa) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${empresa}`;
                     if(assinantes) document.getElementById('stats-text').innerText = `${assinantes} Assinantes • R$ ${receitaNum.toLocaleString('pt-BR')}/mês`;
                 }
