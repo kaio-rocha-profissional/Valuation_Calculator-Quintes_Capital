@@ -28,7 +28,7 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: flex-start;
-            padding: 80px 20px 20px 20px; 
+            padding: 80px 20px 80px 20px; 
         }
 
         /* --- LANDING PAGE --- */
@@ -52,19 +52,67 @@
             font-weight: 800; text-transform: uppercase; letter-spacing: 3px;
             cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4); text-decoration: none; font-size: 1.1rem;
+            margin-bottom: 80px;
         }
         .btn-premium:hover { transform: scale(1.05); box-shadow: 0 20px 50px rgba(59, 130, 246, 0.6); }
 
+        /* --- SEÇÃO: COMO FUNCIONA (CRONOLÓGICO VETICAL) --- */
+        .section-title { font-size: 0.8rem; color: #3b82f6; text-transform: uppercase; letter-spacing: 4px; font-weight: 700; margin-bottom: 40px; }
+        
+        .how-it-works {
+            max-width: 600px;
+            margin: 0 auto 80px auto;
+            text-align: left;
+            position: relative;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        /* Linha conectora vertical */
+        .step-item:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            left: 20px;
+            top: 45px;
+            width: 1px;
+            height: calc(100% - 10px);
+            background: linear-gradient(to bottom, #3b82f6, transparent);
+        }
+
+        .step-number {
+            min-width: 42px;
+            height: 42px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #3b82f6;
+            z-index: 2;
+        }
+
+        .step-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
+        .step-content p { font-size: 0.9rem; color: #64748b; line-height: 1.5; }
+
+        /* --- BENEFÍCIOS --- */
         .benefits-grid {
             display: flex; justify-content: center; gap: 30px; margin-top: 50px;
-            padding-top: 35px; border-top: 1px solid rgba(255, 255, 255, 0.05); width: 100%;
+            padding-top: 50px; border-top: 1px solid rgba(255, 255, 255, 0.05); width: 100%;
         }
         .benefit-item { flex: 1; max-width: 250px; text-align: left; }
         .benefit-item h4 { font-size: 0.85rem; color: #3b82f6; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
         .benefit-item p { font-size: 0.9rem; color: #64748b; line-height: 1.4; }
 
-        /* --- FOOTER POWERED BY (TEXTO) --- */
-        .footer-text-brand { margin-top: 45px; text-align: center; opacity: 0.6; }
+        /* --- FOOTER --- */
+        .footer-text-brand { margin-top: 60px; text-align: center; opacity: 0.6; }
         .pwr-by { font-size: 0.6rem; letter-spacing: 4px; color: #475569; text-transform: uppercase; margin-bottom: 12px; }
         .f-brand-main { font-weight: 700; font-size: 1.2rem; letter-spacing: 10px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
         .f-brand-sub { font-weight: 400; font-size: 0.55rem; letter-spacing: 8px; text-transform: uppercase; color: #475569; }
@@ -86,6 +134,7 @@
             .active { padding-top: 50px; }
             .hero-title { font-size: 2.5rem; }
             .benefits-grid { flex-direction: column; align-items: center; text-align: center; gap: 35px; }
+            .how-it-works { padding-left: 10px; }
         }
     </style>
 </head>
@@ -98,6 +147,39 @@
             <p class="subheadline">Metodologia avançada de M&A para empresários que buscam clareza estratégica e maximização de resultados.</p>
             
             <button class="btn-premium" onclick="irParaEtapa2()">Calcular Valuation Agora</button>
+            
+            <!-- NOVA SEÇÃO: COMO FUNCIONA -->
+            <p class="section-title">Como Funciona</p>
+            <div class="how-it-works">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Diagnóstico Operacional</h3>
+                        <p>Você informa os principais KPIs da sua operação, como receita mensal, ticket médio e volume de assinantes.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Processamento Inteligente</h3>
+                        <p>Nossa engine de M&A analisa os dados baseada em múltiplos setoriais atualizados de transações reais.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Acesso Exclusivo</h3>
+                        <p>Após a coleta, você receberá um link seguro por e-mail para acessar seu valuation e ofertas estratégicas.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Apoio à Decisão</h3>
+                        <p>Visualize seu valor de mercado e escolha o plano de detalhamento ou consultoria que melhor atende seu momento.</p>
+                    </div>
+                </div>
+            </div>
             
             <div class="benefits-grid">
                 <div class="benefit-item">
@@ -142,7 +224,6 @@
             <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 40px;">Expanda sua Análise Estratégica</h2>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1100px;">
-                <!-- Cards de planos -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:40px; text-align:left;">
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Básico</p>
                     <p style="font-size:2rem; font-weight:800; margin-bottom:25px;">R$ 490</p>
@@ -170,28 +251,23 @@
             const assinantes = params.get('assinantes');
 
             if (receitaRaw) {
-                // Se cair aqui, é porque veio do link do e-mail
                 document.getElementById('etapa1').style.display = 'none';
                 document.getElementById('iframe-container').style.display = 'none';
-                
                 const etapa3 = document.getElementById('etapa3');
                 etapa3.classList.add('active');
 
-                // Cálculo
                 const receitaLimpa = receitaRaw.replace(/[^\d.,]/g, '').replace(',', '.');
                 const receitaNum = parseFloat(receitaLimpa);
                 
                 if (!isNaN(receitaNum)) {
                     const valTotal = (receitaNum * 12) * 6;
                     document.getElementById('res-valor').innerText = valTotal.toLocaleString('pt-BR', {maximumFractionDigits: 0});
-                    
                     if(empresa) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${empresa}`;
                     if(assinantes) document.getElementById('stats-text').innerText = `${assinantes} Assinantes • R$ ${receitaNum.toLocaleString('pt-BR')}/mês`;
                 }
             }
         }
 
-        // Checar automaticamente ao carregar
         window.onload = processarValuation;
 
         function irParaEtapa2() {
