@@ -134,16 +134,16 @@
         .input-group input { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: white; outline: none; transition: 0.3s; }
         .input-group input:focus { border-color: #3b82f6; }
 
-        /* --- PAGAMENTO ESTILOS --- */
-        .payment-methods { display: flex; gap: 15px; margin-bottom: 30px; }
+        /* --- MÉTODOS DE PAGAMENTO --- */
+        .payment-methods { display: flex; gap: 10px; margin-bottom: 30px; }
         .method-card { 
-            flex: 1; padding: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
+            flex: 1; padding: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
             border-radius: 15px; cursor: pointer; text-align: center; transition: 0.3s;
-            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
         }
         .method-card.active { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
-        .method-card svg { width: 24px; height: 24px; fill: #fff; }
-        .method-card span { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .method-card svg { width: 22px; height: 22px; fill: #fff; }
+        .method-card span { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
         .payment-details { display: none; animation: fadeIn 0.4s ease; }
         .payment-details.active { display: block; }
@@ -160,7 +160,7 @@
         #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; opacity: 0; transition: 0.8s; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        @media (max-width: 850px) { .btn-premium { padding: 22px 50px; font-size: 1.1rem; width: 100%; } .footer-grid { flex-direction: column; gap: 30px; } .payment-methods { flex-direction: column; } }
+        @media (max-width: 850px) { .btn-premium { padding: 22px 50px; font-size: 1.1rem; width: 100%; } .footer-grid { flex-direction: column; gap: 30px; } }
     </style>
 </head>
 <body>
@@ -184,6 +184,14 @@
                 <div class="item-row reveal"><div class="item-icon">03</div><div class="item-text"><h3>Acesso Exclusivo</h3><p>Link seguro por e-mail para acessar seu valuation.</p></div></div>
             </div>
             
+            <!-- SEÇÃO RESTAURADA AQUI -->
+            <p class="section-title reveal">Por que fazer o meu valuation?</p>
+            <div class="items-list">
+                <div class="item-row reveal"><div class="item-icon"><div class="icon-dot"></div></div><div class="item-text"><h3>Estratégia</h3><p>Dados para fundamentar negociações e expansão comercial.</p></div></div>
+                <div class="item-row reveal"><div class="item-icon"><div class="icon-dot"></div></div><div class="item-text"><h3>Captação</h3><p>Atraia investimento com indicadores profissionais.</p></div></div>
+                <div class="item-row reveal"><div class="item-icon"><div class="icon-dot"></div></div><div class="item-text"><h3>Gestão</h3><p>Identifique os drivers que multiplicam o seu valor.</p></div></div>
+            </div>
+            
             <div class="reveal" style="margin: 80px 0 20px 0;">
                 <button class="btn-premium" onclick="irParaEtapa2()">Calcular Valuation Agora</button>
             </div>
@@ -191,7 +199,7 @@
             <footer class="site-footer reveal">
                 <div class="footer-grid">
                     <div class="footer-info"><h6>E-mail</h6><p>info@quintescapital.com.br</p></div>
-                    <div class="footer-info"><h6>Endereço</h6><p>Av. Pres. Juscelino Kubitschek, 1327<br>São Paulo - SP</p></div>
+                    <div class="footer-info"><h6>Endereço</h6><p>Av. Pres. Juscelino Kubitschek, 1327<br>Itaim Bibi, São Paulo - SP</p></div>
                 </div>
                 <div class="footer-copyright">© 2026 Quintes Capital. Todos os direitos reservados.</div>
             </footer>
@@ -242,16 +250,15 @@
     <div id="etapa4" class="page">
         <div class="hero-container">
             <h2 class="hero-title reveal">Seus Dados</h2>
-            <p class="subheadline reveal">Para emissão de nota e acesso ao relatório.</p>
+            <p class="subheadline reveal">Preencha as informações para emissão da nota fiscal e acesso.</p>
             
             <div class="checkout-container reveal">
-                <div class="input-group"><label>Nome Completo</label><input type="text" id="nome-check" placeholder="João Silva"></div>
+                <div class="input-group"><label>Nome Completo</label><input type="text" id="nome-check" placeholder="Ex: João Silva"></div>
                 <div class="input-group"><label>E-mail Corporativo</label><input type="email" id="email-check" placeholder="nome@empresa.com.br"></div>
                 <div class="input-group"><label>WhatsApp</label><input type="tel" id="tel-check" placeholder="(00) 00000-0000"></div>
                 <div class="input-group"><label>CPF ou CNPJ</label><input type="text" id="doc-check" placeholder="00.000.000/0000-00"></div>
                 <button class="btn-premium" style="width: 100%; margin-top: 20px; font-size: 1.1rem; padding: 20px;" onclick="irParaEtapa5()">Escolher Pagamento</button>
             </div>
-            
             <p class="reveal" style="margin-top: 40px; cursor: pointer; color: #64748b;" onclick="transicao('etapa4', 'etapa3')">← Voltar para Planos</p>
         </div>
     </div>
@@ -260,7 +267,7 @@
     <div id="etapa5" class="page">
         <div class="hero-container">
             <h2 class="hero-title reveal">Pagamento</h2>
-            <p class="subheadline reveal">Plano: <b id="display-plano" style="color: #3b82f6;">---</b></p>
+            <p class="subheadline reveal">Plano Selecionado: <b id="display-plano" style="color: #3b82f6;">---</b></p>
             
             <div class="checkout-container reveal">
                 <div class="payment-methods">
@@ -278,7 +285,7 @@
                     </div>
                 </div>
 
-                <!-- Detalhes do Cartão -->
+                <!-- Formulários Dinâmicos -->
                 <div id="form-cartao" class="payment-details active">
                     <div class="input-group"><label>Número do Cartão</label><input type="text" placeholder="0000 0000 0000 0000"></div>
                     <div style="display: flex; gap: 15px;">
@@ -286,22 +293,19 @@
                         <div class="input-group" style="flex: 1;"><label>CVV</label><input type="text" placeholder="123"></div>
                     </div>
                     <div class="input-group"><label>Nome no Cartão</label><input type="text" placeholder="Como escrito no cartão"></div>
-                    <button class="btn-premium" style="width: 100%; margin-top: 10px; font-size: 1.1rem; padding: 20px;">Finalizar Compra</button>
+                    <button class="btn-premium" style="width: 100%; margin-top: 10px; font-size: 1.1rem; padding: 20px;">Finalizar Pagamento</button>
                 </div>
 
-                <!-- Detalhes PIX -->
                 <div id="form-pix" class="payment-details">
-                    <p style="text-align: center; color: #a8b2d1; font-size: 0.9rem; margin-bottom: 20px;">O código QR será gerado na próxima tela para pagamento imediato.</p>
-                    <button class="btn-premium" style="width: 100%; font-size: 1.1rem; padding: 20px;">Gerar QR Code PIX</button>
+                    <p style="text-align: center; color: #a8b2d1; font-size: 0.9rem; margin-bottom: 20px;">Clique abaixo para gerar o código Copia e Cola e o QR Code.</p>
+                    <button class="btn-premium" style="width: 100%; font-size: 1.1rem; padding: 20px;">Gerar Código PIX</button>
                 </div>
 
-                <!-- Detalhes Boleto -->
                 <div id="form-boleto" class="payment-details">
-                    <p style="text-align: center; color: #a8b2d1; font-size: 0.9rem; margin-bottom: 20px;">O boleto será enviado para o seu e-mail e ficará disponível para download.</p>
+                    <p style="text-align: center; color: #a8b2d1; font-size: 0.9rem; margin-bottom: 20px;">O boleto será gerado e enviado para o e-mail cadastrado.</p>
                     <button class="btn-premium" style="width: 100%; font-size: 1.1rem; padding: 20px;">Gerar Boleto</button>
                 </div>
             </div>
-            
             <p class="reveal" style="margin-top: 40px; cursor: pointer; color: #64748b;" onclick="transicao('etapa5', 'etapa4')">← Alterar Dados Pessoais</p>
         </div>
     </div>
@@ -311,7 +315,7 @@
             const elms = document.querySelectorAll(`#${containerId} .reveal`);
             elms.forEach(el => el.classList.remove('active'));
             elms.forEach((el, index) => {
-                setTimeout(() => { el.classList.add('active'); }, index * 150);
+                setTimeout(() => { el.classList.add('active'); }, index * 120);
             });
         }
 
@@ -359,18 +363,14 @@
         }
 
         function irParaEtapa5() {
-            // Validação simples
             const nome = document.getElementById('nome-check').value;
-            if(!nome) { alert('Por favor, preencha seus dados.'); return; }
+            if(!nome) { alert('Por favor, preencha os dados obrigatórios.'); return; }
             transicao('etapa4', 'etapa5');
         }
 
         function selecionarMetodo(metodo, elemento) {
-            // UI Toggle
             document.querySelectorAll('.method-card').forEach(c => c.classList.remove('active'));
             elemento.classList.add('active');
-
-            // Form Toggle
             document.querySelectorAll('.payment-details').forEach(d => d.classList.remove('active'));
             document.getElementById('form-' + metodo).classList.add('active');
         }
