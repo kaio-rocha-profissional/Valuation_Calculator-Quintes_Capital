@@ -21,10 +21,10 @@
             width: 100%;
         }
 
-        /* --- ANIMAÇÕES SEQUENCIAIS (FADE CRESCENTE) --- */
+        /* --- ANIMAÇÕES SEQUENCIAIS (REVEAL) --- */
         .reveal {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(25px);
             transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .reveal.active {
@@ -55,7 +55,7 @@
             opacity: 0;
             transition: opacity 0.6s ease;
         }
-        .page.active { 
+        .page.active-page { 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
@@ -64,8 +64,8 @@
             opacity: 1;
         }
 
-        /* --- HERO --- */
-        .hero-container { text-align: center; max-width: 1000px; width: 100%; }
+        /* --- HERO & TITULOS --- */
+        .hero-container { text-align: center; max-width: 1100px; width: 100%; }
         .hero-title { 
             font-weight: 800; font-size: clamp(2.5rem, 6vw, 4.2rem); 
             letter-spacing: -2px; line-height: 1.05; margin-bottom: 25px; 
@@ -74,14 +74,14 @@
         }
         .subheadline { font-size: 1.3rem; color: #a8b2d1; margin-bottom: 45px; font-weight: 300; max-width: 750px; margin: 0 auto 45px auto; line-height: 1.5; }
 
-        /* --- SEÇÕES PADRONIZADAS --- */
         .section-title { 
-            font-weight: 800; font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 40px; 
+            font-weight: 800; font-size: clamp(1.1rem, 3vw, 1.4rem); margin-bottom: 40px; 
             background: linear-gradient(to right, #3b82f6, #ffffff); -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; text-transform: uppercase; text-align: center; margin-top: 80px;
             letter-spacing: 4px;
         }
 
+        /* --- LISTA DE ITENS PADRONIZADA --- */
         .items-list { max-width: 650px; margin: 0 auto 40px auto; text-align: left; }
         .item-row { 
             display: flex; gap: 25px; margin-bottom: 20px; padding: 25px; 
@@ -89,16 +89,20 @@
             background: rgba(255, 255, 255, 0.02); 
             border: 1px solid rgba(255, 255, 255, 0.05); 
         }
-        .item-row:hover { background: rgba(59, 130, 246, 0.08); transform: translateX(10px); border-color: #3b82f6; }
+        .item-row:hover { background: rgba(59, 130, 246, 0.08); transform: translateX(12px); border-color: #3b82f6; }
+        
         .item-icon {
             min-width: 42px; height: 42px; background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-weight: 800; font-size: 0.9rem; color: #3b82f6;
         }
+        /* Icone sem letra para a segunda seção */
+        .icon-dot { min-width: 12px; height: 12px; background: #3b82f6; border-radius: 50%; border: none; }
+
         .item-text h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
         .item-text p { font-size: 0.95rem; color: #94a3b8; line-height: 1.5; font-weight: 300; }
 
-        /* --- BOTÃO CALCULAR AGORA (MAXIMIZADO) --- */
+        /* --- BOTÃO PRINCIPAL --- */
         .btn-premium {
             background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
             color: white; border: none; padding: 28px 100px; border-radius: 60px;
@@ -108,34 +112,28 @@
         }
         .btn-premium:hover { transform: scale(1.05); box-shadow: 0 20px 60px rgba(59, 130, 246, 0.7); }
 
-        /* --- PÁGINA 2: RESULTADOS (DESIGN ANTIGO) --- */
+        /* --- CARDS DE OFERTA (ETAPA 3) --- */
         .valuation-badge { 
-            background: rgba(255, 255, 255, 0.02); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 60px 40px; border-radius: 40px; 
-            margin: 0 auto 60px auto; width: 100%; max-width: 750px; 
-            text-align: center; transition: 0.4s;
+            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 60px 40px; border-radius: 40px; margin: 0 auto 60px auto; width: 100%; max-width: 750px; text-align: center;
         }
-        .valuation-badge:hover { transform: translateY(-10px); border-color: rgba(59, 130, 246, 0.5); background: rgba(59, 130, 246, 0.03); }
         .valuation-value { font-size: clamp(3.5rem, 9vw, 5.5rem); font-weight: 800; letter-spacing: -3px; }
         
-        .offer-card {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 24px; padding: 40px; text-align: left; transition: 0.4s;
-        }
-        .offer-card:hover { transform: translateY(-10px); border-color: rgba(59, 130, 246, 0.5); }
+        .offer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1100px; margin: 0 auto; }
+        .offer-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 40px; text-align: left; transition: 0.4s; }
+        .offer-card:hover { transform: translateY(-10px); border-color: #3b82f6; }
         .offer-card.featured { background: rgba(59, 130, 246, 0.05); border: 2px solid #3b82f6; }
-        .offer-desc { font-size: 0.85rem; color: #a8b2d1; opacity: 0.6; line-height: 1.5; margin-bottom: 25px; min-height: 45px; }
-
-        .btn-card { width: 100%; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        
+        .btn-card { width: 100%; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
         .btn-outline { border: 1px solid rgba(255, 255, 255, 0.2); background: transparent; color: white; }
         .btn-filled { background: #3b82f6; color: white; border: none; }
 
-        /* --- CHECKOUT --- */
-        .checkout-container { max-width: 500px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 30px; margin: 30px auto; }
-        .input-group { margin-bottom: 20px; text-align: left; }
-        .input-group label { display: block; font-size: 0.75rem; color: #3b82f6; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
-        .input-group input { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: white; outline: none; }
+        /* --- CHECKOUT (ETAPA 4) --- */
+        .checkout-container { max-width: 500px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 30px; margin: 30px auto; text-align: left; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 0.75rem; color: #3b82f6; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .input-group input { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: white; outline: none; transition: 0.3s; }
+        .input-group input:focus { border-color: #3b82f6; }
 
         /* --- RODAPÉ --- */
         .site-footer { width: 100%; max-width: 1100px; margin-top: 100px; padding-top: 50px; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
@@ -159,23 +157,23 @@
     </div>
 
     <!-- ETAPA 1 -->
-    <div id="etapa1" class="page active">
+    <div id="etapa1" class="page active-page">
         <div class="hero-container">
             <h1 class="hero-title reveal">O valor real do seu negócio<br>revelado com precisão.</h1>
             <p class="subheadline reveal">Metodologia avançada de M&A para empresários que buscam clareza estratégica e maximização de resultados.</p>
             
             <p class="section-title reveal">Como Funciona</p>
             <div class="items-list">
-                <div class="item-row reveal"><div class="item-icon">01</div><div class="item-text"><h3>Insira os dados</h3><p>Informe os principais indicadores da sua operação com segurança.</p></div></div>
-                <div class="item-row reveal"><div class="item-icon">02</div><div class="item-text"><h3>Análise de M&A</h3><p>Engine baseada em múltiplos setoriais atualizados do mercado.</p></div></div>
-                <div class="item-row reveal"><div class="item-icon">03</div><div class="item-text"><h3>Acesso Exclusivo</h3><p>Link seguro por e-mail para acessar seu valuation detalhado.</p></div></div>
+                <div class="item-row reveal"><div class="item-icon">01</div><div class="item-text"><h3>Insira os dados</h3><p>Informe os indicadores da sua operação com segurança.</p></div></div>
+                <div class="item-row reveal"><div class="item-icon">02</div><div class="item-text"><h3>Análise de M&A</h3><p>Engine baseada em múltiplos setoriais atualizados.</p></div></div>
+                <div class="item-row reveal"><div class="item-icon">03</div><div class="item-text"><h3>Acesso Exclusivo</h3><p>Link seguro por e-mail para acessar seu valuation.</p></div></div>
             </div>
             
             <p class="section-title reveal">Por que fazer o meu valuation?</p>
             <div class="items-list">
-                <div class="item-row reveal"><div class="item-icon">E</div><div class="item-text"><h3>Estratégia</h3><p>Dados precisos para fundamentar negociações e expansão comercial.</p></div></div>
-                <div class="item-row reveal"><div class="item-icon">C</div><div class="item-text"><h3>Captação</h3><p>Atraia investimento institucional com indicadores profissionais.</p></div></div>
-                <div class="item-row reveal"><div class="item-icon">G</div><div class="item-text"><h3>Gestão</h3><p>Identifique os drivers que multiplicam o valor real do negócio.</p></div></div>
+                <div class="item-row reveal"><div class="item-icon"><div class="icon-dot"></div></div><div class="item-text"><h3>Estratégia</h3><p>Dados para fundamentar negociações e expansão comercial.</p></div></div>
+                <div class="item-row reveal"><div class="item-icon"><div class="icon-dot"></div></div><div class="item-text"><h3>Captação</h3><p>Atraia investimento com indicadores profissionais.</p></div></div>
+                <div class="item-row reveal"><div class="item-icon"><div class="icon-dot"></div></div><div class="item-text"><h3>Gestão</h3><p>Identifique os drivers que multiplicam o seu valor.</p></div></div>
             </div>
             
             <div class="reveal" style="margin: 80px 0 20px 0;">
@@ -197,59 +195,117 @@
         <iframe id="fillout-frame" src="https://forms.fillout.com/t/1qwGDDvuKKus"></iframe>
     </div>
 
-    <!-- ETAPA 3 (RESULTADOS ORIGINAIS) -->
+    <!-- ETAPA 3 (RESULTADOS) -->
     <div id="etapa3" class="page">
-        <div class="hero-container" style="max-width: 1200px;">
-            <div class="valuation-badge">
+        <div class="hero-container">
+            <div class="valuation-badge reveal">
                 <p id="res-empresa" style="color: #3b82f6; font-weight:700; letter-spacing:3px; text-transform:uppercase; font-size:0.75rem; margin-bottom:15px;">Avaliação Estimada</p>
-                <div style="color: #64748b; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;" id="stats-text">Análise de Performance</div>
                 <div class="valuation-value">
                     <span style="font-size:1.5rem; color:#64748b; margin-right:10px;">R$</span><span id="res-valor">0</span>
                 </div>
             </div>
-            <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 40px;">Expanda sua Análise Estratégica</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1100px; margin: 0 auto;">
-                <div class="offer-card"><p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Básico</p><p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 490</p><p class="offer-desc">Relatório estático + Check-up + Plano de ação</p><button class="btn-card btn-outline" onclick="irParaPagamento('Plano Básico', 'R$ 490')">Selecionar</button></div>
-                <div class="offer-card featured"><p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Pro</p><p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 1.290</p><p class="offer-desc">12 meses de Software + Mentorias particulares + Acompanhamento dos indicadores</p><button class="btn-card btn-filled" onclick="irParaPagamento('Plano Pro', 'R$ 1.290')">Selecionar</button></div>
-                <div class="offer-card"><p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Consultoria</p><p style="font-size:2rem; font-weight:800; margin-bottom:10px;">Personalizado</p><p class="offer-desc">Converse com um consultor Quintes Capital</p><button class="btn-card btn-outline" onclick="window.open('https://wa.me/+5511915357579', '_blank')">Falar com Advisor</button></div>
+            
+            <h2 class="reveal" style="font-size: 1.8rem; font-weight: 700; margin-bottom: 40px;">Expanda sua Análise Estratégica</h2>
+            
+            <div class="offer-grid">
+                <div class="offer-card reveal">
+                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Básico</p>
+                    <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 490</p>
+                    <p style="font-size: 0.85rem; color: #a8b2d1; margin-bottom: 25px; line-height: 1.4;">Relatório estático + Check-up + Plano de ação</p>
+                    <button class="btn-card btn-outline" onclick="irParaPagamento('Plano Básico', 'R$ 490')">Selecionar</button>
+                </div>
+                <div class="offer-card featured reveal">
+                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Pro</p>
+                    <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 1.290</p>
+                    <p style="font-size: 0.85rem; color: #a8b2d1; margin-bottom: 25px; line-height: 1.4;">12 meses de Software + Mentorias + Acompanhamento</p>
+                    <button class="btn-card btn-filled" onclick="irParaPagamento('Plano Pro', 'R$ 1.290')">Selecionar</button>
+                </div>
+                <div class="offer-card reveal">
+                    <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Consultoria</p>
+                    <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">M&A Advisory</p>
+                    <p style="font-size: 0.85rem; color: #a8b2d1; margin-bottom: 25px; line-height: 1.4;">Converse com um consultor Quintes Capital</p>
+                    <button class="btn-card btn-outline" onclick="window.open('https://wa.me/+5511915357579', '_blank')">Falar com Advisor</button>
+                </div>
             </div>
+
+            <footer class="site-footer reveal">
+                <div class="footer-grid">
+                    <div class="footer-info"><h6>Headquarters</h6><p>Itaim Bibi, São Paulo - SP</p></div>
+                    <div class="footer-info"><h6>E-mail</h6><p>info@quintescapital.com.br</p></div>
+                </div>
+            </footer>
         </div>
     </div>
 
     <!-- ETAPA 4 (PAGAMENTO) -->
     <div id="etapa4" class="page">
         <div class="hero-container">
-            <h2 class="hero-title" style="font-size: 2.5rem;">Opções de Pagamento</h2>
-            <div class="checkout-container">
-                <p style="color: #a8b2d1; margin-bottom: 20px;">Plano: <b id="plano-selecionado" style="color:#3b82f6;">---</b></p>
-                <div class="input-group"><label>Nome</label><input type="text"></div>
-                <div class="input-group"><label>E-mail</label><input type="email"></div>
-                <button class="btn-premium" style="width: 100%; font-size: 1.1rem; padding: 20px;">Finalizar</button>
+            <h2 class="hero-title reveal">Finalizar Pagamento</h2>
+            <p class="subheadline reveal">Plano Selecionado: <b id="plano-selecionado" style="color: #3b82f6;">---</b></p>
+            
+            <div class="checkout-container reveal">
+                <div class="input-group"><label>Nome Completo</label><input type="text" placeholder="João Silva"></div>
+                <div class="input-group"><label>E-mail Corporativo</label><input type="email" placeholder="nome@empresa.com.br"></div>
+                <div class="input-group"><label>WhatsApp</label><input type="tel" placeholder="(00) 00000-0000"></div>
+                <div class="input-group"><label>CPF ou CNPJ</label><input type="text" placeholder="00.000.000/0000-00"></div>
+                <button class="btn-premium" style="width: 100%; margin-top: 20px; font-size: 1.1rem; padding: 20px;">Pagar Agora</button>
             </div>
-            <p style="margin-top: 40px; cursor: pointer; color: #64748b;" onclick="location.reload()">← Voltar</p>
+            
+            <p class="reveal" style="margin-top: 40px; cursor: pointer; color: #64748b;" onclick="location.reload()">← Voltar</p>
+
+            <footer class="site-footer reveal">
+                <div class="footer-copyright">Ambiente de pagamento seguro criptografado pela Quintes Capital.</div>
+            </footer>
         </div>
     </div>
 
     <script>
-        // Intersection Observer para animação sequencial
+        // Sistema de revelação sequencial
+        function dispararAnimas(containerId) {
+            const elms = document.querySelectorAll(`#${containerId} .reveal`);
+            elms.forEach(el => el.classList.remove('active')); // Reset
+            elms.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('active');
+                }, index * 150); // Delay de 150ms entre cada elemento
+            });
+        }
+
+        // Observer para a Landing Page 1 (scroll)
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => { entry.target.classList.add('active'); }, index * 150);
+                    // Adiciona a classe com um pequeno delay baseado na posição se quiser, 
+                    // mas o dispararAnimas manual funciona melhor para troca de página
+                    entry.target.classList.add('active');
                 }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        function transicao(idSair, idEntrar, displayType = 'flex') {
+        // Inicia a primeira página
+        window.onload = () => {
+            document.querySelectorAll('#etapa1 .reveal').forEach(el => observer.observe(el));
+            dispararAnimas('etapa1');
+            processarValuation();
+        };
+
+        function transicao(idSair, idEntrar) {
             const sair = document.getElementById(idSair);
             const entrar = document.getElementById(idEntrar);
+            
             sair.style.opacity = '0';
             setTimeout(() => {
                 sair.style.display = 'none';
-                entrar.style.display = displayType;
-                setTimeout(() => { entrar.style.opacity = '1'; }, 50);
+                sair.classList.remove('active-page');
+                
+                entrar.style.display = 'flex';
+                setTimeout(() => {
+                    entrar.classList.add('active-page');
+                    entrar.style.opacity = '1';
+                    dispararAnimas(idEntrar);
+                }, 50);
             }, 600);
+            window.scrollTo(0,0);
         }
 
         function irParaEtapa2() {
@@ -273,19 +329,21 @@
             const receitaRaw = params.get('receita');
             const empresa = params.get('empresa');
             if (receitaRaw) {
+                document.getElementById('etapa1').classList.remove('active-page');
                 document.getElementById('etapa1').style.display = 'none';
                 const etapa3 = document.getElementById('etapa3');
                 etapa3.style.display = 'flex';
-                etapa3.classList.add('active');
+                etapa3.classList.add('active-page');
+                
                 const receitaNum = parseFloat(receitaRaw.replace(/[^\d.,]/g, '').replace(',', '.'));
                 if (!isNaN(receitaNum)) {
                     const valTotal = (receitaNum * 12) * 6;
                     document.getElementById('res-valor').innerText = valTotal.toLocaleString('pt-BR');
                     if(empresa) document.getElementById('res-empresa').innerText = `Valuation Estimado • ${empresa}`;
                 }
+                dispararAnimas('etapa3');
             }
         }
-        window.onload = processarValuation;
     </script>
 </body>
 </html>
