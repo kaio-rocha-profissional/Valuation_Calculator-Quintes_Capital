@@ -58,13 +58,15 @@
         }
         .subheadline { font-size: 1.3rem; color: #a8b2d1; margin-bottom: 45px; font-weight: 300; max-width: 750px; margin: 0 auto 45px auto; line-height: 1.5; }
 
-        /* --- COMO FUNCIONA (RECUPERADO) --- */
+        /* --- SEÇÕES DE TÍTULO --- */
         .section-title { 
             font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.3rem); margin-bottom: 60px; 
             background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; text-transform: uppercase; text-align: center; margin-top: 80px;
         }
-        .how-it-works { max-width: 600px; margin: 0 auto 100px auto; text-align: left; position: relative; }
+
+        /* --- COMO FUNCIONA --- */
+        .how-it-works { max-width: 600px; margin: 0 auto 60px auto; text-align: left; position: relative; }
         .step-item { display: flex; gap: 25px; margin-bottom: 40px; position: relative; }
         .step-item:not(:last-child)::after {
             content: ""; position: absolute; left: 20px; top: 45px; width: 1px; height: calc(100% - 10px);
@@ -78,9 +80,9 @@
         .step-content h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
         .step-content p { font-size: 0.95rem; color: #64748b; line-height: 1.5; font-weight: 300; }
 
-        /* --- BENEFICIOS (RECUPERADO) --- */
+        /* --- BENEFICIOS (PORQUE FAZER VALUATION) --- */
         .benefits-grid {
-            display: flex; justify-content: center; gap: 30px; margin-top: 50px;
+            display: flex; justify-content: center; gap: 30px; margin-bottom: 50px;
             padding-top: 50px; border-top: 1px solid rgba(255, 255, 255, 0.05); width: 100%;
         }
         .benefit-item { flex: 1; max-width: 250px; text-align: left; }
@@ -123,7 +125,7 @@
         }
         .input-group input:focus { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
 
-        /* --- FOOTER (RECUPERADO) --- */
+        /* --- FOOTER --- */
         .footer-text-brand { margin-top: 80px; text-align: center; opacity: 0.6; width: 100%; }
         .pwr-by { font-size: 0.6rem; letter-spacing: 4px; color: #475569; text-transform: uppercase; margin-bottom: 12px; }
         .f-brand-main { font-weight: 700; font-size: 1.2rem; letter-spacing: 10px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
@@ -150,7 +152,7 @@
         <a href="https://www.quintescapital.com.br/" target="_blank" class="social-link"><span class="qc-tag">QC</span></a>
     </div>
 
-    <!-- ETAPA 1: LANDING PAGE COMPLETA -->
+    <!-- ETAPA 1: LANDING PAGE -->
     <div id="etapa1" class="page active">
         <div class="hero-container">
             <h1 class="hero-title">O valor real do seu negócio<br>revelado com precisão.</h1>
@@ -184,11 +186,12 @@
                 </div>
             </div>
             
-            <!-- BENEFICIOS -->
+            <!-- PORQUE FAZER MEU VALUATION? -->
+            <p class="section-title">PORQUE FAZER O MEU VALUATION?</p>
             <div class="benefits-grid">
                 <div class="benefit-item">
                     <h4>Estratégia</h4>
-                    <p>Dados precisos para fundamentar negociações.</p>
+                    <p>Dados precisos para fundamentar negociações e expansão.</p>
                 </div>
                 <div class="benefit-item">
                     <h4>Captação</h4>
@@ -196,7 +199,7 @@
                 </div>
                 <div class="benefit-item">
                     <h4>Gestão</h4>
-                    <p>Identifique e otimize os drivers que multiplicam o valor.</p>
+                    <p>Identifique e otimize os drivers que multiplicam o valor real.</p>
                 </div>
             </div>
 
@@ -231,21 +234,21 @@
                 <div class="offer-card">
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Básico</p>
                     <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 490</p>
-                    <p class="offer-desc">Relatório estático + Check-up + Plano de ação</p>
+                    <p class="offer-desc">Relatório estático + check-up + plano de ação</p>
                     <button class="btn-card btn-outline" onclick="irParaPagamento('Plano Básico', 'R$ 490')">Selecionar</button>
                 </div>
                 
                 <div class="offer-card featured">
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Pro</p>
                     <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 1.290</p>
-                    <p class="offer-desc">Software Calculadora de Valuation + Mentorias particulares + Análise mensal de evolução</p>
+                    <p class="offer-desc">12 meses de calculadora + mentorias particular</p>
                     <button class="btn-card btn-filled" onclick="irParaPagamento('Plano Pro', 'R$ 1.290')">Selecionar</button>
                 </div>
                 
                 <div class="offer-card">
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Consultoria</p>
                     <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">Personalizado</p>
-                    <p class="offer-desc">Converse com um consultor Quintes Capital</p>
+                    <p class="offer-desc">Acompanhamento High-End para transações de M&A</p>
                     <button class="btn-card btn-outline" onclick="window.open('https://wa.me/seu-numero', '_blank')">Falar com Advisor</button>
                 </div>
             </div>
