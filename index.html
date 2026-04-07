@@ -83,7 +83,7 @@
             -webkit-text-fill-color: transparent; text-transform: uppercase; text-align: center; margin-top: 100px;
         }
 
-        /* --- COMO FUNCIONA (HOVER) --- */
+        /* --- COMO FUNCIONA --- */
         .how-it-works { max-width: 600px; margin: 0 auto 60px auto; text-align: left; position: relative; }
         .step-item { display: flex; gap: 25px; margin-bottom: 20px; padding: 20px; border-radius: 20px; transition: 0.4s; }
         .step-item:hover { background: rgba(59, 130, 246, 0.05); transform: translateX(15px); }
@@ -101,7 +101,7 @@
         .step-item:hover .step-content h3 { color: #3b82f6; }
         .step-content p { font-size: 0.95rem; color: #64748b; line-height: 1.5; font-weight: 300; }
 
-        /* --- BENEFICIOS (HOVER) --- */
+        /* --- BENEFICIOS --- */
         .benefits-grid { display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; padding-top: 50px; border-top: 1px solid rgba(255, 255, 255, 0.05); width: 100%; }
         .benefit-item { flex: 1; max-width: 300px; text-align: left; padding: 30px; border-radius: 24px; border: 1px solid transparent; transition: 0.4s; }
         .benefit-item:hover { background: rgba(255, 255, 255, 0.02); border-color: rgba(59, 130, 246, 0.3); transform: translateY(-10px); }
@@ -125,14 +125,12 @@
             transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             cursor: default;
         }
-        /* Efeito de hover adicionado aqui */
         .valuation-badge:hover {
             transform: translateY(-10px);
             border-color: rgba(59, 130, 246, 0.5);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             background: rgba(59, 130, 246, 0.03);
         }
-
         .valuation-value { font-size: clamp(3.5rem, 9vw, 5.5rem); font-weight: 800; letter-spacing: -3px; }
         
         .offer-card {
@@ -171,15 +169,50 @@
         }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* --- FOOTER --- */
-        .footer-text-brand { margin-top: 80px; text-align: center; opacity: 0.6; width: 100%; }
-        .pwr-by { font-size: 0.6rem; letter-spacing: 4px; color: #475569; text-transform: uppercase; margin-bottom: 12px; }
-        .f-brand-main { font-weight: 700; font-size: 1.2rem; letter-spacing: 10px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
-        .f-brand-sub { font-weight: 400; font-size: 0.55rem; letter-spacing: 8px; text-transform: uppercase; color: #475569; }
+        /* --- NOVO RODAPÉ --- */
+        .site-footer {
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 100px;
+            padding-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: left;
+        }
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        .footer-col { flex: 1; min-width: 250px; }
+        .footer-col h5 {
+            color: #3b82f6;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .footer-col p {
+            color: #a8b2d1;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        .footer-copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 30px 0;
+            color: #475569;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
 
         @media (max-width: 850px) { 
             .active { padding-top: 80px; } 
             .benefits-grid { flex-direction: column; align-items: center; text-align: center; }
+            .footer-grid { flex-direction: column; text-align: center; gap: 40px; }
         }
     </style>
 </head>
@@ -210,7 +243,21 @@
                 <div class="benefit-item"><h4>Captação</h4><p>Atraia investimento institucional com indicadores profissionais.</p></div>
                 <div class="benefit-item"><h4>Gestão</h4><p>Identifique drivers que multiplicam o valor real.</p></div>
             </div>
-            <div class="footer-text-brand"><p class="pwr-by">Powered by</p><div class="f-brand-main">Quintes Capital</div><div class="f-brand-sub">Next Gen Advisory</div></div>
+            
+            <!-- RODAPÉ ETAPA 1 -->
+            <footer class="site-footer">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h5>Email</h5>
+                        <p>info@quintescapital.com.br</p>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Address</h5>
+                        <p>Av. Pres. Juscelino Kubitschek, 1327<br>Itaim Bibi, São Paulo - SP<br>04543-011</p>
+                    </div>
+                </div>
+                <div class="footer-copyright">2026 Quintes Capital. All rights reserved.</div>
+            </footer>
         </div>
     </div>
 
@@ -235,6 +282,21 @@
                 <div class="offer-card featured"><p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Pro</p><p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 1.290</p><p class="offer-desc">12 meses de Software + Mentorias particulares + Acompanhamento dos indicadores</p><button class="btn-card btn-filled" onclick="irParaPagamento('Plano Pro', 'R$ 1.290')">Selecionar</button></div>
                 <div class="offer-card"><p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Consultoria</p><p style="font-size:2rem; font-weight:800; margin-bottom:10px;">Personalizado</p><p class="offer-desc">Converse com um consultor Quintes Capital</p><button class="btn-card btn-outline" onclick="window.open('https://wa.me/seu-numero', '_blank')">Falar com Advisor</button></div>
             </div>
+
+            <!-- RODAPÉ ETAPA 3 -->
+            <footer class="site-footer">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h5>Email</h5>
+                        <p>info@quintescapital.com.br</p>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Address</h5>
+                        <p>Av. Pres. Juscelino Kubitschek, 1327<br>Itaim Bibi, São Paulo - SP<br>04543-011</p>
+                    </div>
+                </div>
+                <div class="footer-copyright">2026 Quintes Capital. All rights reserved.</div>
+            </footer>
         </div>
     </div>
 
@@ -251,6 +313,21 @@
                 <button class="btn-premium" style="width: 100%; margin-top: 20px;">Finalizar Pagamento</button>
             </div>
             <p style="margin-top: 40px; cursor: pointer; color: #64748b;" onclick="location.reload()">← Voltar</p>
+
+            <!-- RODAPÉ ETAPA 4 -->
+            <footer class="site-footer">
+                <div class="footer-grid">
+                    <div class="footer-col">
+                        <h5>Email</h5>
+                        <p>info@quintescapital.com.br</p>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Address</h5>
+                        <p>Av. Pres. Juscelino Kubitschek, 1327<br>Itaim Bibi, São Paulo - SP<br>04543-011</p>
+                    </div>
+                </div>
+                <div class="footer-copyright">2026 Quintes Capital. All rights reserved.</div>
+            </footer>
         </div>
     </div>
 
@@ -258,12 +335,10 @@
         function transicao(idSair, idEntrar, displayType = 'flex') {
             const sair = document.getElementById(idSair);
             const entrar = document.getElementById(idEntrar);
-            
             sair.style.opacity = '0';
             setTimeout(() => {
                 sair.style.display = 'none';
                 sair.classList.remove('active');
-                
                 entrar.style.display = displayType;
                 setTimeout(() => {
                     entrar.classList.add('active');
@@ -282,10 +357,8 @@
                 document.getElementById('etapa1').style.display = 'none';
                 const etapa3 = document.getElementById('etapa3');
                 etapa3.classList.add('active');
-
                 const receitaLimpa = receitaRaw.replace(/[^\d.,]/g, '').replace(',', '.');
                 const receitaNum = parseFloat(receitaLimpa);
-                
                 if (!isNaN(receitaNum)) {
                     const valTotal = (receitaNum * 12) * 6;
                     document.getElementById('res-valor').innerText = valTotal.toLocaleString('pt-BR', {maximumFractionDigits: 0});
@@ -299,7 +372,6 @@
         function irParaEtapa2() {
             const sair = document.getElementById('etapa1');
             const entrar = document.getElementById('iframe-container');
-            
             sair.style.opacity = '0';
             setTimeout(() => {
                 sair.style.display = 'none';
