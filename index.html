@@ -96,7 +96,6 @@
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-weight: 800; font-size: 0.9rem; color: #3b82f6;
         }
-        /* Icone sem letra para a segunda seção */
         .icon-dot { min-width: 12px; height: 12px; background: #3b82f6; border-radius: 50%; border: none; }
 
         .item-text h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
@@ -112,7 +111,7 @@
         }
         .btn-premium:hover { transform: scale(1.05); box-shadow: 0 20px 60px rgba(59, 130, 246, 0.7); }
 
-        /* --- CARDS DE OFERTA (ETAPA 3) --- */
+        /* --- CARDS DE OFERTA --- */
         .valuation-badge { 
             background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); 
             padding: 60px 40px; border-radius: 40px; margin: 0 auto 60px auto; width: 100%; max-width: 750px; text-align: center;
@@ -128,12 +127,28 @@
         .btn-outline { border: 1px solid rgba(255, 255, 255, 0.2); background: transparent; color: white; }
         .btn-filled { background: #3b82f6; color: white; border: none; }
 
-        /* --- CHECKOUT (ETAPA 4) --- */
+        /* --- CHECKOUT --- */
         .checkout-container { max-width: 500px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 30px; margin: 30px auto; text-align: left; }
         .input-group { margin-bottom: 20px; }
         .input-group label { display: block; font-size: 0.75rem; color: #3b82f6; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
         .input-group input { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: white; outline: none; transition: 0.3s; }
         .input-group input:focus { border-color: #3b82f6; }
+
+        /* --- PAGAMENTO ESTILOS --- */
+        .payment-methods { display: flex; gap: 15px; margin-bottom: 30px; }
+        .method-card { 
+            flex: 1; padding: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 15px; cursor: pointer; text-align: center; transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+        }
+        .method-card.active { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+        .method-card svg { width: 24px; height: 24px; fill: #fff; }
+        .method-card span { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        .payment-details { display: none; animation: fadeIn 0.4s ease; }
+        .payment-details.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- RODAPÉ --- */
         .site-footer { width: 100%; max-width: 1100px; margin-top: 100px; padding-top: 50px; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
@@ -145,7 +160,7 @@
         #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; opacity: 0; transition: 0.8s; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        @media (max-width: 850px) { .btn-premium { padding: 22px 50px; font-size: 1.1rem; width: 100%; } .footer-grid { flex-direction: column; gap: 30px; } }
+        @media (max-width: 850px) { .btn-premium { padding: 22px 50px; font-size: 1.1rem; width: 100%; } .footer-grid { flex-direction: column; gap: 30px; } .payment-methods { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -169,13 +184,6 @@
                 <div class="item-row reveal"><div class="item-icon">03</div><div class="item-text"><h3>Acesso Exclusivo</h3><p>Link seguro por e-mail para acessar seu valuation.</p></div></div>
             </div>
             
-            <p class="section-title reveal">Por que fazer o meu valuation?</p>
-            <div class="items-list">
-                <div class="item-row reveal"><div class="item-icon"><div class="icon-dot"></div></div><div class="item-text"><h3>Estratégia</h3><p>Dados para fundamentar negociações e expansão comercial.</p></div></div>
-                <div class="item-row reveal"><div class="item-icon"><div class="icon-dot"></div></div><div class="item-text"><h3>Captação</h3><p>Atraia investimento com indicadores profissionais.</p></div></div>
-                <div class="item-row reveal"><div class="item-icon"><div class="icon-dot"></div></div><div class="item-text"><h3>Gestão</h3><p>Identifique os drivers que multiplicam o seu valor.</p></div></div>
-            </div>
-            
             <div class="reveal" style="margin: 80px 0 20px 0;">
                 <button class="btn-premium" onclick="irParaEtapa2()">Calcular Valuation Agora</button>
             </div>
@@ -183,7 +191,7 @@
             <footer class="site-footer reveal">
                 <div class="footer-grid">
                     <div class="footer-info"><h6>E-mail</h6><p>info@quintescapital.com.br</p></div>
-                    <div class="footer-info"><h6>Endereço</h6><p>Av. Pres. Juscelino Kubitschek, 1327<br>Itaim Bibi, São Paulo - SP | 04543-011</p></div>
+                    <div class="footer-info"><h6>Endereço</h6><p>Av. Pres. Juscelino Kubitschek, 1327<br>São Paulo - SP</p></div>
                 </div>
                 <div class="footer-copyright">© 2026 Quintes Capital. Todos os direitos reservados.</div>
             </footer>
@@ -212,13 +220,13 @@
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Básico</p>
                     <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 490</p>
                     <p style="font-size: 0.85rem; color: #a8b2d1; margin-bottom: 25px; line-height: 1.4;">Relatório estático + Check-up + Plano de ação</p>
-                    <button class="btn-card btn-outline" onclick="irParaPagamento('Plano Básico', 'R$ 490')">Selecionar</button>
+                    <button class="btn-card btn-outline" onclick="irParaEtapa4('Plano Básico', 'R$ 490')">Selecionar</button>
                 </div>
                 <div class="offer-card featured reveal">
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Pro</p>
                     <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 1.290</p>
                     <p style="font-size: 0.85rem; color: #a8b2d1; margin-bottom: 25px; line-height: 1.4;">12 meses de Software + Mentorias + Acompanhamento</p>
-                    <button class="btn-card btn-filled" onclick="irParaPagamento('Plano Pro', 'R$ 1.290')">Selecionar</button>
+                    <button class="btn-card btn-filled" onclick="irParaEtapa4('Plano Pro', 'R$ 1.290')">Selecionar</button>
                 </div>
                 <div class="offer-card reveal">
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Consultoria</p>
@@ -227,59 +235,90 @@
                     <button class="btn-card btn-outline" onclick="window.open('https://wa.me/+5511915357579', '_blank')">Falar com Advisor</button>
                 </div>
             </div>
-
-            <footer class="site-footer reveal">
-                </div>
-            </footer>
         </div>
     </div>
 
-    <!-- ETAPA 4 (PAGAMENTO) -->
+    <!-- ETAPA 4 (DADOS PESSOAIS) -->
     <div id="etapa4" class="page">
         <div class="hero-container">
-            <h2 class="hero-title reveal">Pagamento</h2>
-            <p class="subheadline reveal">Plano Selecionado: <b id="plano-selecionado" style="color: #3b82f6;">---</b></p>
+            <h2 class="hero-title reveal">Seus Dados</h2>
+            <p class="subheadline reveal">Para emissão de nota e acesso ao relatório.</p>
             
             <div class="checkout-container reveal">
-                <div class="input-group"><label>Nome Completo</label><input type="text" placeholder="João Silva"></div>
-                <div class="input-group"><label>E-mail Corporativo</label><input type="email" placeholder="nome@empresa.com.br"></div>
-                <div class="input-group"><label>WhatsApp</label><input type="tel" placeholder="(00) 00000-0000"></div>
-                <div class="input-group"><label>CPF ou CNPJ</label><input type="text" placeholder="00.000.000/0000-00"></div>
-                <button class="btn-premium" style="width: 100%; margin-top: 20px; font-size: 1.1rem; padding: 20px;">Pagar Agora</button>
+                <div class="input-group"><label>Nome Completo</label><input type="text" id="nome-check" placeholder="João Silva"></div>
+                <div class="input-group"><label>E-mail Corporativo</label><input type="email" id="email-check" placeholder="nome@empresa.com.br"></div>
+                <div class="input-group"><label>WhatsApp</label><input type="tel" id="tel-check" placeholder="(00) 00000-0000"></div>
+                <div class="input-group"><label>CPF ou CNPJ</label><input type="text" id="doc-check" placeholder="00.000.000/0000-00"></div>
+                <button class="btn-premium" style="width: 100%; margin-top: 20px; font-size: 1.1rem; padding: 20px;" onclick="irParaEtapa5()">Escolher Pagamento</button>
             </div>
             
-            <p class="reveal" style="margin-top: 40px; cursor: pointer; color: #64748b;" onclick="location.reload()">← Voltar</p>
+            <p class="reveal" style="margin-top: 40px; cursor: pointer; color: #64748b;" onclick="transicao('etapa4', 'etapa3')">← Voltar para Planos</p>
+        </div>
+    </div>
 
-            <footer class="site-footer reveal">
-                <div class="footer-copyright">2026 Quintes Capital. All rights reserved.</div>
-            </footer>
+    <!-- ETAPA 5 (MÉTODO DE PAGAMENTO) -->
+    <div id="etapa5" class="page">
+        <div class="hero-container">
+            <h2 class="hero-title reveal">Pagamento</h2>
+            <p class="subheadline reveal">Plano: <b id="display-plano" style="color: #3b82f6;">---</b></p>
+            
+            <div class="checkout-container reveal">
+                <div class="payment-methods">
+                    <div class="method-card active" onclick="selecionarMetodo('cartao', this)">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                        <span>Cartão</span>
+                    </div>
+                    <div class="method-card" onclick="selecionarMetodo('pix', this)">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L4.5 11h15L12 2zm0 20l7.5-9h-15L12 22z"/></svg>
+                        <span>PIX</span>
+                    </div>
+                    <div class="method-card" onclick="selecionarMetodo('boleto', this)">
+                        <svg viewBox="0 0 24 24"><path d="M3 4h2v16H3V4zm4 0h1v16H7V4zm3 0h2v16h-2V4zm5 0h1v16h-1V4zm3 0h3v16h-3V4z"/></svg>
+                        <span>Boleto</span>
+                    </div>
+                </div>
+
+                <!-- Detalhes do Cartão -->
+                <div id="form-cartao" class="payment-details active">
+                    <div class="input-group"><label>Número do Cartão</label><input type="text" placeholder="0000 0000 0000 0000"></div>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="input-group" style="flex: 2;"><label>Validade</label><input type="text" placeholder="MM/AA"></div>
+                        <div class="input-group" style="flex: 1;"><label>CVV</label><input type="text" placeholder="123"></div>
+                    </div>
+                    <div class="input-group"><label>Nome no Cartão</label><input type="text" placeholder="Como escrito no cartão"></div>
+                    <button class="btn-premium" style="width: 100%; margin-top: 10px; font-size: 1.1rem; padding: 20px;">Finalizar Compra</button>
+                </div>
+
+                <!-- Detalhes PIX -->
+                <div id="form-pix" class="payment-details">
+                    <p style="text-align: center; color: #a8b2d1; font-size: 0.9rem; margin-bottom: 20px;">O código QR será gerado na próxima tela para pagamento imediato.</p>
+                    <button class="btn-premium" style="width: 100%; font-size: 1.1rem; padding: 20px;">Gerar QR Code PIX</button>
+                </div>
+
+                <!-- Detalhes Boleto -->
+                <div id="form-boleto" class="payment-details">
+                    <p style="text-align: center; color: #a8b2d1; font-size: 0.9rem; margin-bottom: 20px;">O boleto será enviado para o seu e-mail e ficará disponível para download.</p>
+                    <button class="btn-premium" style="width: 100%; font-size: 1.1rem; padding: 20px;">Gerar Boleto</button>
+                </div>
+            </div>
+            
+            <p class="reveal" style="margin-top: 40px; cursor: pointer; color: #64748b;" onclick="transicao('etapa5', 'etapa4')">← Alterar Dados Pessoais</p>
         </div>
     </div>
 
     <script>
-        // Sistema de revelação sequencial
         function dispararAnimas(containerId) {
             const elms = document.querySelectorAll(`#${containerId} .reveal`);
-            elms.forEach(el => el.classList.remove('active')); // Reset
+            elms.forEach(el => el.classList.remove('active'));
             elms.forEach((el, index) => {
-                setTimeout(() => {
-                    el.classList.add('active');
-                }, index * 150); // Delay de 150ms entre cada elemento
+                setTimeout(() => { el.classList.add('active'); }, index * 150);
             });
         }
 
-        // Observer para a Landing Page 1 (scroll)
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    // Adiciona a classe com um pequeno delay baseado na posição se quiser, 
-                    // mas o dispararAnimas manual funciona melhor para troca de página
-                    entry.target.classList.add('active');
-                }
-            });
+            entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
 
-        // Inicia a primeira página
         window.onload = () => {
             document.querySelectorAll('#etapa1 .reveal').forEach(el => observer.observe(el));
             dispararAnimas('etapa1');
@@ -289,12 +328,10 @@
         function transicao(idSair, idEntrar) {
             const sair = document.getElementById(idSair);
             const entrar = document.getElementById(idEntrar);
-            
             sair.style.opacity = '0';
             setTimeout(() => {
                 sair.style.display = 'none';
                 sair.classList.remove('active-page');
-                
                 entrar.style.display = 'flex';
                 setTimeout(() => {
                     entrar.classList.add('active-page');
@@ -316,9 +353,26 @@
             }, 600);
         }
 
-        function irParaPagamento(plano, preco) {
-            document.getElementById('plano-selecionado').innerText = `${plano} (${preco})`;
+        function irParaEtapa4(plano, preco) {
+            document.getElementById('display-plano').innerText = `${plano} (${preco})`;
             transicao('etapa3', 'etapa4');
+        }
+
+        function irParaEtapa5() {
+            // Validação simples
+            const nome = document.getElementById('nome-check').value;
+            if(!nome) { alert('Por favor, preencha seus dados.'); return; }
+            transicao('etapa4', 'etapa5');
+        }
+
+        function selecionarMetodo(metodo, elemento) {
+            // UI Toggle
+            document.querySelectorAll('.method-card').forEach(c => c.classList.remove('active'));
+            elemento.classList.add('active');
+
+            // Form Toggle
+            document.querySelectorAll('.payment-details').forEach(d => d.classList.remove('active'));
+            document.getElementById('form-' + metodo).classList.add('active');
         }
 
         function processarValuation() {
