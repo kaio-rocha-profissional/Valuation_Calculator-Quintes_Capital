@@ -21,7 +21,7 @@
             width: 100%;
         }
 
-        /* --- BOTÕES SOCIAIS --- */
+        /* --- BOTÕES SOCIAIS (SEM BORDAS) --- */
         .social-nav {
             position: absolute;
             top: 30px;
@@ -48,7 +48,7 @@
         .page { display: none; min-height: 100vh; width: 100vw; animation: fadeIn 1.2s ease-out forwards; }
         .active { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 100px 20px 80px 20px; }
 
-        /* --- HERO & TITLES --- */
+        /* --- TITULOS --- */
         .hero-container { text-align: center; max-width: 1000px; width: 100%; position: relative; }
         .hero-title { 
             font-weight: 800; font-size: clamp(2.5rem, 6vw, 4.2rem); 
@@ -56,20 +56,46 @@
             background: linear-gradient(to right, #ffffff, #94a3b8); 
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
         }
-        .section-title { font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.3rem); margin-bottom: 60px; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; }
+        .subheadline { font-size: 1.3rem; color: #a8b2d1; margin-bottom: 45px; font-weight: 300; max-width: 750px; margin: 0 auto 45px auto; line-height: 1.5; }
 
-        /* --- CARDS DE OFERTA --- */
+        /* --- COMO FUNCIONA (RECUPERADO) --- */
+        .section-title { 
+            font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.3rem); margin-bottom: 60px; 
+            background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; text-transform: uppercase; text-align: center; margin-top: 80px;
+        }
+        .how-it-works { max-width: 600px; margin: 0 auto 100px auto; text-align: left; position: relative; }
+        .step-item { display: flex; gap: 25px; margin-bottom: 40px; position: relative; }
+        .step-item:not(:last-child)::after {
+            content: ""; position: absolute; left: 20px; top: 45px; width: 1px; height: calc(100% - 10px);
+            background: linear-gradient(to bottom, #3b82f6, transparent);
+        }
+        .step-number {
+            min-width: 42px; height: 42px; background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.9rem; color: #3b82f6; z-index: 2;
+        }
+        .step-content h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
+        .step-content p { font-size: 0.95rem; color: #64748b; line-height: 1.5; font-weight: 300; }
+
+        /* --- BENEFICIOS (RECUPERADO) --- */
+        .benefits-grid {
+            display: flex; justify-content: center; gap: 30px; margin-top: 50px;
+            padding-top: 50px; border-top: 1px solid rgba(255, 255, 255, 0.05); width: 100%;
+        }
+        .benefit-item { flex: 1; max-width: 250px; text-align: left; }
+        .benefit-item h4 { font-size: 0.85rem; color: #3b82f6; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .benefit-item p { font-size: 0.9rem; color: #64748b; line-height: 1.4; }
+
+        /* --- CARDS DE OFERTA COM HOVER --- */
         .offer-card {
-            background: rgba(255, 255, 255, 0.02); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
+            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 24px; padding: 40px; text-align: left;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .offer-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-10px); background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         .offer-card.featured { background: rgba(59, 130, 246, 0.05); border: 2px solid #3b82f6; }
         .offer-desc { font-size: 0.85rem; color: #a8b2d1; opacity: 0.6; line-height: 1.5; margin-bottom: 25px; min-height: 45px; }
@@ -77,17 +103,18 @@
         /* --- BOTÕES --- */
         .btn-premium {
             background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
-            color: white; border: none; padding: 20px 60px; border-radius: 60px;
-            font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
+            color: white; border: none; padding: 24px 80px; border-radius: 60px;
+            font-weight: 800; text-transform: uppercase; letter-spacing: 3px;
             cursor: pointer; transition: 0.4s; box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+            font-size: 1.1rem; text-decoration: none; display: inline-block;
         }
         .btn-premium:hover { transform: scale(1.05); box-shadow: 0 20px 50px rgba(59, 130, 246, 0.6); }
         .btn-card { width: 100%; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; }
         .btn-outline { border: 1px solid rgba(255, 255, 255, 0.2); background: transparent; color: white; }
         .btn-filled { background: #3b82f6; color: white; border: none; }
 
-        /* --- FORMULÁRIO DE PAGAMENTO --- */
-        .checkout-container { max-width: 500px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 30px; margin-top: 30px; }
+        /* --- CHECKOUT FORM --- */
+        .checkout-container { max-width: 500px; width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 30px; margin: 30px auto; }
         .input-group { margin-bottom: 20px; text-align: left; }
         .input-group label { display: block; font-size: 0.75rem; color: #3b82f6; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
         .input-group input { 
@@ -96,13 +123,22 @@
         }
         .input-group input:focus { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
 
+        /* --- FOOTER (RECUPERADO) --- */
+        .footer-text-brand { margin-top: 80px; text-align: center; opacity: 0.6; width: 100%; }
+        .pwr-by { font-size: 0.6rem; letter-spacing: 4px; color: #475569; text-transform: uppercase; margin-bottom: 12px; }
+        .f-brand-main { font-weight: 700; font-size: 1.2rem; letter-spacing: 10px; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
+        .f-brand-sub { font-weight: 400; font-size: 0.55rem; letter-spacing: 8px; text-transform: uppercase; color: #475569; }
+
         /* --- OUTROS --- */
         .valuation-badge { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); padding: 60px 20px; border-radius: 40px; margin-bottom: 60px; width: 100%; max-width: 750px; text-align: center; }
         .valuation-value { font-size: clamp(3.5rem, 9vw, 5.5rem); font-weight: 800; letter-spacing: -3px; }
         #iframe-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        @media (max-width: 850px) { .active { padding-top: 80px; } }
+        @media (max-width: 850px) { 
+            .active { padding-top: 80px; } 
+            .benefits-grid { flex-direction: column; align-items: center; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -114,12 +150,62 @@
         <a href="https://www.quintescapital.com.br/" target="_blank" class="social-link"><span class="qc-tag">QC</span></a>
     </div>
 
-    <!-- ETAPA 1: LANDING PAGE -->
+    <!-- ETAPA 1: LANDING PAGE COMPLETA -->
     <div id="etapa1" class="page active">
         <div class="hero-container">
             <h1 class="hero-title">O valor real do seu negócio<br>revelado com precisão.</h1>
-            <p style="font-size:1.3rem; color:#a8b2d1; margin-bottom:45px; font-weight:300;">Metodologia avançada de M&A para empresários que buscam clareza estratégica.</p>
+            <p class="subheadline">Metodologia avançada de M&A para empresários que buscam clareza estratégica e maximização de resultados.</p>
+            
             <button class="btn-premium" onclick="irParaEtapa2()">Calcular Valuation Agora</button>
+            
+            <!-- COMO FUNCIONA -->
+            <p class="section-title">Como Funciona</p>
+            <div class="how-it-works">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Insira os dados</h3>
+                        <p>Você informa os principais indicadores da sua operação.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Processamento Inteligente</h3>
+                        <p>Nossa engine de M&A analisa os dados baseada em múltiplos setoriais atualizados.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Acesso Exclusivo</h3>
+                        <p>Após a coleta, você receberá um link seguro por e-mail para acessar seu valuation.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BENEFICIOS -->
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <h4>Estratégia</h4>
+                    <p>Dados precisos para fundamentar negociações.</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>Captação</h4>
+                    <p>Atraia investimento institucional com indicadores profissionais.</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>Gestão</h4>
+                    <p>Identifique e otimize os drivers que multiplicam o valor.</p>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="footer-text-brand">
+                <p class="pwr-by">Powered by</p>
+                <div class="f-brand-main">Quintes Capital</div>
+                <div class="f-brand-sub">Next Gen Advisory</div>
+            </div>
         </div>
     </div>
 
@@ -142,7 +228,6 @@
             <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 40px;">Expanda sua Análise Estratégica</h2>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; width: 100%; max-width: 1100px;">
-                <!-- PLANO BÁSICO -->
                 <div class="offer-card">
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Básico</p>
                     <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 490</p>
@@ -150,7 +235,6 @@
                     <button class="btn-card btn-outline" onclick="irParaPagamento('Plano Básico', 'R$ 490')">Selecionar</button>
                 </div>
                 
-                <!-- PLANO PRO -->
                 <div class="offer-card featured">
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Plano Pro</p>
                     <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">R$ 1.290</p>
@@ -158,7 +242,6 @@
                     <button class="btn-card btn-filled" onclick="irParaPagamento('Plano Pro', 'R$ 1.290')">Selecionar</button>
                 </div>
                 
-                <!-- CONSULTORIA -->
                 <div class="offer-card">
                     <p style="color:#3b82f6; font-weight:700; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px;">Consultoria</p>
                     <p style="font-size:2rem; font-weight:800; margin-bottom:10px;">Personalizado</p>
@@ -173,31 +256,16 @@
     <div id="etapa4" class="page">
         <div class="hero-container">
             <h2 class="hero-title" style="font-size: 2.5rem;">Opções de Pagamento</h2>
-            <p style="color: #a8b2d1; margin-bottom: 30px;">Você selecionou o <b id="plano-selecionado" style="color: #3b82f6;">Plano</b>. Complete seus dados para finalizar.</p>
+            <p style="color: #a8b2d1; margin-bottom: 30px;">Você selecionou o <b id="plano-selecionado" style="color: #3b82f6;">Plano</b>.</p>
             
             <div class="checkout-container">
-                <div class="input-group">
-                    <label>Nome Completo</label>
-                    <input type="text" placeholder="Ex: João Silva">
-                </div>
-                <div class="input-group">
-                    <label>E-mail Corporativo</label>
-                    <input type="email" placeholder="nome@empresa.com.br">
-                </div>
-                <div class="input-group">
-                    <label>WhatsApp / Celular</label>
-                    <input type="tel" placeholder="(00) 00000-0000">
-                </div>
-                <div class="input-group">
-                    <label>CPF ou CNPJ</label>
-                    <input type="text" placeholder="000.000.000-00">
-                </div>
-                
-                <button class="btn-premium" style="width: 100%; margin-top: 20px;">Ir para Pagamento Seguro</button>
-                <p style="font-size: 0.7rem; color: #475569; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px;">Ambiente Criptografado & Seguro</p>
+                <div class="input-group"><label>Nome Completo</label><input type="text" placeholder="Ex: João Silva"></div>
+                <div class="input-group"><label>E-mail Corporativo</label><input type="email" placeholder="nome@empresa.com.br"></div>
+                <div class="input-group"><label>WhatsApp</label><input type="tel" placeholder="(00) 00000-0000"></div>
+                <div class="input-group"><label>CPF ou CNPJ</label><input type="text" placeholder="000.000.000-00"></div>
+                <button class="btn-premium" style="width: 100%; margin-top: 20px;">Finalizar Pagamento</button>
             </div>
-            
-            <p style="margin-top: 40px; cursor: pointer; color: #64748b; font-size: 0.9rem;" onclick="location.reload()">← Voltar aos planos</p>
+            <p style="margin-top: 40px; cursor: pointer; color: #64748b;" onclick="location.reload()">← Voltar</p>
         </div>
     </div>
 
@@ -209,8 +277,8 @@
             const assinantes = params.get('assinantes');
 
             if (receitaRaw) {
-                document.getElementById('etapa1').classList.remove('active');
                 document.getElementById('etapa1').style.display = 'none';
+                document.getElementById('iframe-container').style.display = 'none';
                 const etapa3 = document.getElementById('etapa3');
                 etapa3.classList.add('active');
 
@@ -225,7 +293,6 @@
                 }
             }
         }
-
         window.onload = processarValuation;
 
         function irParaEtapa2() {
@@ -235,15 +302,10 @@
         }
 
         function irParaPagamento(nomePlano, preco) {
-            // Esconde etapa de resultados
             document.getElementById('etapa3').classList.remove('active');
             document.getElementById('etapa3').style.display = 'none';
-            
-            // Mostra etapa de pagamento
             const etapa4 = document.getElementById('etapa4');
             etapa4.classList.add('active');
-            
-            // Atualiza texto do plano selecionado
             document.getElementById('plano-selecionado').innerText = `${nomePlano} (${preco})`;
             window.scrollTo(0,0);
         }
